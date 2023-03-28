@@ -8,6 +8,7 @@ class MovableObject {
   imageCache = {}; //available images for this movable object
   currentImage = 0;
   speed = 0.15;
+  otherDirection = false;
 
   // loadImage('img/test.png')
   loadImage(path) {

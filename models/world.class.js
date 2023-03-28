@@ -1,34 +1,8 @@
 class World {
   character = new Pepe();
-  //TODO for Schleife
-  backgroundObjects = [
-    new BackgroundObject("img/5_background/layers/air.png", 719 * -1, 0),
-    new BackgroundObject("img/5_background/layers/3_third_layer/2.png", 719 * -1, 0),
-    new BackgroundObject("img/5_background/layers/2_second_layer/2.png", 719 * -1, 0),
-    new BackgroundObject("img/5_background/layers/1_first_layer/2.png", 719 * -1, 0),
-
-    new BackgroundObject("img/5_background/layers/air.png", 719 * 0, 0),
-    new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 719 * 0, 0),
-    new BackgroundObject("img/5_background/layers/2_second_layer/1.png", 719 * 0, 0),
-    new BackgroundObject("img/5_background/layers/1_first_layer/1.png", 719 * 0, 0),
-
-    new BackgroundObject("img/5_background/layers/air.png", 719 * 1, 0),
-    new BackgroundObject("img/5_background/layers/3_third_layer/2.png", 719 * 1, 0),
-    new BackgroundObject("img/5_background/layers/2_second_layer/2.png", 719 * 1, 0),
-    new BackgroundObject("img/5_background/layers/1_first_layer/2.png", 719 * 1, 0),
-
-    new BackgroundObject("img/5_background/layers/air.png", 719 * 2, 0),
-    new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 719 * 2, 0),
-    new BackgroundObject("img/5_background/layers/2_second_layer/1.png", 719 * 2, 0),
-    new BackgroundObject("img/5_background/layers/1_first_layer/1.png", 719 * 2, 0),
-
-    new BackgroundObject("img/5_background/layers/air.png", 719 * 3, 0),
-    new BackgroundObject("img/5_background/layers/3_third_layer/2.png", 719 * 3, 0),
-    new BackgroundObject("img/5_background/layers/2_second_layer/2.png", 719 * 3, 0),
-    new BackgroundObject("img/5_background/layers/1_first_layer/2.png", 719 * 4, 0),
-  ];
-  enemies = [new Chicken(), new Chicken(), new Chicken()];
-  clouds = [new Cloud()];
+  backgroundObjects = level1.backgroundObjects;
+  enemies = level1.enemies;
+  clouds = level1.clouds;
   ctx;
   canvas;
   keyboard;

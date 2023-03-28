@@ -4,6 +4,10 @@ class MovableObject {
   img;
   height;
   width;
+  framerate = 60;
+  imageCache = {}; //available images for this movable object
+  currentImage = 0;
+  speed = 0.15;
 
   // loadImage('img/test.png')
   loadImage(path) {
@@ -11,7 +15,19 @@ class MovableObject {
     this.img.src = path;
   }
 
-  moveLeft() {}
+  loadImages(arr) {
+    arr.forEach((path) => {
+      let img = new Image(); // img/2_character_pepe/2_walk/W-21.png
+      img.src = path;
+      this.imageCache[path] = img;
+    });
+  }
+
+  moveLeft() {
+    setInterval(() => {
+      this.x -= this.speed;
+    }, 1000 / this.framerate);
+  }
 
   moveRight() {
     console.log("Moving right");

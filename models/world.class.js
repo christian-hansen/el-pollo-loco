@@ -1,5 +1,6 @@
 class World {
   character = new Character();
+  backgroundObjects = [new BackgroundObject('img/5_background/layers/1_first_layer/1.png')];
   enemies = [new Chicken(), new Chicken(), new Chicken()];
   clouds = [new Cloud(), new Cloud()]
   ctx;
@@ -15,18 +16,10 @@ class World {
     //Clear Canvas
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    //Draw Character to canvas
-    this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
-
-    //Draw Enemies to canvas
-    this.enemies.forEach(enemy => {
-        this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height)
-    });
-
-    //Draw Clouds to canvas
-    this.clouds.forEach(cloud => {
-        this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height)
-    });
+    this.addObjectsToMap(this.backgroundObjects)
+    this.addObjectsToMap(this.clouds)
+    this.addToMap(this.character);
+    this.addObjectsToMap(this.enemies)
 
 
     //Draw wird immer wieder aufgerufen
@@ -35,4 +28,15 @@ class World {
       self.draw();
     });
   }
+
+  addObjectsToMap(objects) {
+    objects.forEach(o => {
+        this.addToMap(o)
+    });
+  }
+
+  addToMap(object) {
+    this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height)
+  }
+
 }

@@ -1,8 +1,7 @@
 class World {
   character = new Pepe();
-  backgroundObjects = level1.backgroundObjects;
-  enemies = level1.enemies;
-  clouds = level1.clouds;
+  level = level1;
+
   ctx;
   canvas;
   keyboard;
@@ -26,10 +25,10 @@ class World {
 
     this.ctx.translate(this.camera_x, 0);
 
-    this.addObjectsToMap(this.backgroundObjects);
-    this.addObjectsToMap(this.clouds);
+    this.addObjectsToMap(this.level.backgroundObjects);
+    this.addObjectsToMap(this.level.clouds);
     this.addToMap(this.character);
-    this.addObjectsToMap(this.enemies);
+    this.addObjectsToMap(this.level.enemies);
 
     this.ctx.translate(-this.camera_x, 0);
 
@@ -40,12 +39,14 @@ class World {
     });
   }
 
+  //add arrays with single objects
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  // add single object
   addToMap(object) {
     if (object.otherDirection) {
       this.flipImage(object);

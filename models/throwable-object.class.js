@@ -17,14 +17,6 @@ ground = 480;
     this.applyGravity();
     setInterval(() => {
       this.x += 5;
-    }, 25)
-
-    // if (this.isAboveGround() || this.speedY > 0) {
-    // setInterval(() => {
-    //   this.x += 10;
-    // }, 50);}
-    // else {
-    //   this.x += 0;
-    // }
+    }, 25);
   }
 }

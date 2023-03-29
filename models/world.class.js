@@ -1,11 +1,11 @@
 class World {
   character = new Pepe();
   level = level1;
-
   ctx;
   canvas;
   keyboard;
   camera_x = 0;
+  statusBar = new StatusBar();
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -24,9 +24,8 @@ class World {
     setInterval(() => {
       this.level.enemies.forEach( (enemy) => {
         if (this.character.isColliding(enemy)) {
-          this.character.hit()
-          console.log("Collison with ", enemy);
-          console.log("Energy is ", this.character.energy);
+          this.character.hit();
+          this.statusBar.setPercentage(this.character.energy);
         };
       });
 
@@ -38,13 +37,19 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.ctx.translate(this.camera_x, 0);
-
+    
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
+
+    this.ctx.translate(-this.camera_x, 0); //Back
+    // ---- Space for fixed objects -----
+    this.addToMap(this.statusBar);
+    this.ctx.translate(this.camera_x, 0); 
+
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
 
-    this.ctx.translate(-this.camera_x, 0);
+    this.ctx.translate(-this.camera_x, 0); //Back
 
     //Draw wird immer wieder aufgerufen
     let self = this;

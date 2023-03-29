@@ -48,6 +48,7 @@ class Pepe extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_DEAD);
+    this.loadImages(this.IMAGES_HURT);
     this.applyGravity();
     this.animate();
   }
@@ -74,13 +75,17 @@ class Pepe extends MovableObject {
     setInterval(() => {
 
       if(this.isDead()){
-        this.playWalkAnimation(this.IMAGES_DEAD);
+        this.playAnimation(this.IMAGES_DEAD);
+      }
+      else if(this.isHurt()){
+        this.playAnimation(this.IMAGES_HURT);
       }
       else if (this.isAboveGround()) {
-        this.playWalkAnimation(this.IMAGES_JUMPING);
-      } else if (this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT) {
+        this.playAnimation(this.IMAGES_JUMPING);
+      } 
+      else if (this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT) {
         // WALK animation
-        this.playWalkAnimation(this.IMAGES_WALKING);
+        this.playAnimation(this.IMAGES_WALKING);
       }
     }, 8000 / 60);
   }

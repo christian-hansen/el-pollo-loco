@@ -48,11 +48,11 @@ class World {
 
   // add single object
   addToMap(object) {
-    if (object.otherDirection) {
+    if (object.flippedGraphics) {
       this.flipImage(object);
     }
     this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
-    if (object.otherDirection) {
+    if (object.flippedGraphics) {
       this.flipImageBack(object);
     }
   }

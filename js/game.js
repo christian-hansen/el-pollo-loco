@@ -12,50 +12,49 @@ console.log("My character is", world.character);
 
 window.addEventListener('keydown', (event) => {
 if(event.keyCode == 39) {
-    keyboard.RIGHT = true;
+    keyboard.KEY_RIGHT = true;
 }
 if(event.keyCode == 37) {
-    keyboard.LEFT = true;
+    keyboard.KEY_LEFT = true;
 }
 if(event.keyCode == 38) {
-    keyboard.UP = true;
+    keyboard.KEY_UP = true;
 }
 if(event.keyCode == 40) {
-    keyboard.DOWN = true;
+    keyboard.KEY_DOWN = true;
 }
 if(event.keyCode == 32) {
-    console.log("SPACE");
-    keyboard.SPACE = true;
+    keyboard.KEY_SPACE = true;
 }
 if(event.keyCode == 68) {
-    keyboard.D = true;
+    keyboard.KEY_D = true;
 }
 if(event.keyCode == 80) {
-    keyboard.P = true;
+    keyboard.KEY_P = true;
 }
 });
 
 window.addEventListener('keyup', (event) => {
     if(event.keyCode == 39) {
-        keyboard.RIGHT = false;
+        keyboard.KEY_RIGHT = false;
     }
     if(event.keyCode == 37) {
-        keyboard.LEFT = false;
+        keyboard.KEY_LEFT = false;
     }
     if(event.keyCode == 38) {
-        keyboard.UP = false;
+        keyboard.KEY_UP = false;
     }
     if(event.keyCode == 40) {
-        keyboard.DOWN = false;
+        keyboard.KEY_DOWN = false;
     }
     if(event.keyCode == 32) {
-        keyboard.SPACE = false;
+        keyboard.KEY_SPACE = false;
     }
     if(event.keyCode == 68) {
-        keyboard.D = false;
+        keyboard.KEY_D = false;
     }
     if(event.keyCode == 80) {
-        keyboard.P = false;
+        keyboard.KEY_P = false;
     }
     });
 

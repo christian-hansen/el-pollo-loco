@@ -28,6 +28,7 @@ if(event.keyCode == 32) {
 }
 if(event.keyCode == 68) {
     keyboard.KEY_D = true;
+    console.log("D");
 }
 if(event.keyCode == 80) {
     keyboard.KEY_P = true;

@@ -4,7 +4,7 @@ class MovableObject extends DrawableObject {
   speed = 0.15;
   flippedGraphics = false;
   speedY = 0;
-  acceleration = 1;
+  acceleration = 1 ;
   ground;
   energy = 100;
   lastHit = 0;
@@ -12,13 +12,17 @@ class MovableObject extends DrawableObject {
   //Gravitation
   applyGravity() {
     setInterval(() => {
-      if (this.isAboveGround() || this.speedY > 0) this.y -= this.speedY;
-      this.speedY -= this.acceleration;
+      if (this.isAboveGround() || this.speedY > 0) {
+      this.y -= this.speedY;
+      this.speedY -= this.acceleration;}
     }, 1000 / 25);
   }
 
   isAboveGround() {
-    return this.y < this.ground;
+    if(this instanceof ThrowableObject) {
+      return true;
+    } else {
+    return this.y < this.ground;}
   }
 
   isColliding(obj) {

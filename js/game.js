@@ -2,6 +2,7 @@ let canvas;
 let ctx;
 let world;
 let keyboard = new Keyboard();
+let allIntervals = [];
 
 function init() {
 canvas = document.getElementById('canvas');
@@ -9,6 +10,23 @@ world = new World(canvas, keyboard)
 
 console.log("My character is", world.character);
 }
+
+
+function setStoppableInterval(fn, time) {
+    let id = setInterval(fn, time);
+    allIntervals.push(id);
+}
+
+
+function stopGame() {
+    // Intervalle Stoppen
+    clearAllIntervals();
+}
+
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  };
+
 
 window.addEventListener('keydown', (event) => {
 if(event.keyCode == 39) {
@@ -59,6 +77,3 @@ window.addEventListener('keyup', (event) => {
     }
     });
 
-// function keypress() {
-//     input = document.addEventListener('keypress', (event) => event.code)
-// }

@@ -15,8 +15,13 @@ body {
     background-image: url('/img/9_background/desert.png');
     background-position: center;
     font-family: "zabars", Arial, Helvetica, sans-serif;
-
     color: rgb(237, 237, 237);
+}
+
+.fullscreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {

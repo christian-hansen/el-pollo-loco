@@ -54,39 +54,49 @@ class Pepe extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
-      this.walking_sound.pause();
-      if (this.world.keyboard.KEY_RIGHT && this.x < this.world.level.end_of_level_x) {
-        this.moveRight();
-        this.walking_sound.play();
-        this.flippedGraphics = false;
-      }
-      if (this.world.keyboard.KEY_LEFT && this.x > 0) {
-        this.moveLeft()
-        this.walking_sound.play();
-        this.flippedGraphics = true;
-      }
-      if (this.world.keyboard.KEY_SPACE && !this.isAboveGround()) {
-        this.jump();
-      }
-      this.world.camera_x = -this.x + 75;
-    }, 1200 / 60);
+    setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
+    setStoppableInterval(() => this.playCharacterAnimations(), 8000 / 60);
+  }
 
-    setInterval(() => {
+  moveCharacter() {
+    this.walking_sound.playbackRate = 1;
+    this.walking_sound.pause();
+    if (this.canMoveRight()) this.moveRight();
+    if (this.canMoveLeft()) this.moveLeft();
+    if (this.canJump()) this.jump();
+    this.world.camera_x = -this.x + 75;
+  }
 
-      if(this.isDead()){
-        this.playAnimation(this.IMAGES_DEAD);
-      }
-      else if(this.isHurt()){
-        this.playAnimation(this.IMAGES_HURT);
-      }
-      else if (this.isAboveGround()) {
-        this.playAnimation(this.IMAGES_JUMPING);
-      } 
-      else if (this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT) {
-        // WALK animation
-        this.playAnimation(this.IMAGES_WALKING);
-      }
-    }, 8000 / 60);
+  playCharacterAnimations() {
+    if (this.isDead()) this.playAnimation(this.IMAGES_DEAD);
+    else if (this.isHurt()) this.playAnimation(this.IMAGES_HURT);
+    else if (this.isAboveGround()) this.playAnimation(this.IMAGES_JUMPING);
+    else if (this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT) this.playAnimation(this.IMAGES_WALKING);
+  }
+
+
+  // Start movement functions
+  canMoveRight() {
+    return this.world.keyboard.KEY_RIGHT && this.x < this.world.level.end_of_level_x;
+  }
+
+  moveRight() {
+    super.moveRight();
+    if (!this.isAboveGround()) this.walking_sound.play();
+    this.flippedGraphics = false;
+  }
+
+  canMoveLeft() {
+    return this.world.keyboard.KEY_LEFT && this.x > 0;
+  }
+
+  moveLeft() {
+    super.moveLeft();
+    if (!this.isAboveGround()) this.walking_sound.play();
+    this.flippedGraphics = true;
+  }
+
+  canJump() {
+    return this.world.keyboard.KEY_SPACE && !this.isAboveGround();
   }
 }

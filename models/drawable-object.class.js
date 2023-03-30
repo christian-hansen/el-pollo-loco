@@ -7,7 +7,8 @@ class DrawableObject {
   imageCache = {}; //available images for this movable object
 
   draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    try {ctx.drawImage(this.img, this.x, this.y, this.width, this.height);}
+    catch(e) {console.warn("Error loading image", this.img);}
   }
 
   drawFrame(ctx) {
@@ -22,7 +23,7 @@ class DrawableObject {
 
   // loadImage('img/test.png')
   loadImage(path) {
-    this.img = new Image(); //<img>
+    this.img = new Image(); 
     this.img.src = path;
   }
 

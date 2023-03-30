@@ -56,7 +56,7 @@ class Endboss extends MovableObject {
         }
 
         animate() {
-            let i = 0
+            let i;
             let hadFirstContact = false;
 
             setInterval(() => {
@@ -78,7 +78,7 @@ class Endboss extends MovableObject {
                 // if (i > 40) {this.playAnimation(this.IMAGES_DEAD);}   
 
                 i++;
-                console.log(i);
+                // console.log(i);
             }, 200);
 
 

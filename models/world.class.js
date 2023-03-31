@@ -41,8 +41,9 @@ class World {
 
   checkThrowObjects() {
     if (this.keyboard.KEY_D) {
-      let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+      let bottle = new ThrowableBottle(this.character.x + 100, this.character.y + 100);
       this.throwableObjects.push(bottle);
+      console.log(this.throwableObjects);
     }
   }
 
@@ -54,6 +55,7 @@ class World {
     
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
+    this.addObjectsToMap(this.level.collectableItems);
     this.addObjectsToMap(this.throwableObjects);
     
     this.ctx.translate(-this.camera_x, 0); //Back

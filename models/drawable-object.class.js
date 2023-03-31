@@ -5,6 +5,7 @@ class DrawableObject {
   height;
   width;
   imageCache = {}; //available images for this movable object
+  currentImage = 0;
 
   draw(ctx) {
     try {ctx.drawImage(this.img, this.x, this.y, this.width, this.height);}

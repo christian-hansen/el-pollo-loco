@@ -1,5 +1,5 @@
 class MovableObject extends DrawableObject {
-  currentImage = 0;
+
   framerate = 60;
   speed = 0.15;
   flippedGraphics = false;

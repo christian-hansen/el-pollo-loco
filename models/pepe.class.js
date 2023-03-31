@@ -59,7 +59,7 @@ class Pepe extends MovableObject {
   }
 
   moveCharacter() {
-    this.walking_sound.playbackRate = 1;
+    this.walking_sound.playbackRate = 2;
     this.walking_sound.pause();
     if (this.canMoveRight()) this.moveRight();
     if (this.canMoveLeft()) this.moveLeft();

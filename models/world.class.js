@@ -5,7 +5,7 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
-  statusBar = new StatusBar();
+  statusBar = [new HealthBar(), new CoinBar(), new BottleBar()];
   throwableObjects = [];
 
   constructor(canvas, keyboard) {
@@ -16,32 +16,47 @@ class World {
     this.setWorld();
     this.run();
   }
-  
+
   setWorld() {
     this.character.world = this;
   }
 
   run() {
     setStoppableInterval(() => {
-
       this.checkCollisions();
+      this.checkCollection();
       this.checkThrowObjects();
-
     }, 200);
   }
 
+  // Enemy collion causes hit and reduces health bar
   checkCollisions() {
-    this.level.enemies.forEach( (enemy) => {
+    this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
-      };
+        this.statusBar[0].setPercentage(this.character.energy);
+      }
+    });
+  }
+
+  // Enemy collion causes hit and reduces health bar
+  checkCollection() {
+    this.level.collectableItems.forEach((item) => {
+      if (this.character.isColliding(item) && item instanceof Bottle) {
+        console.log(item, "Bottle collected");
+      }
+      if (this.character.isColliding(item) && item instanceof Coin) {
+        console.log(item, "Coin collected");
+      }
     });
   }
 
   checkThrowObjects() {
     if (this.keyboard.KEY_D) {
-      let bottle = new ThrowableBottle(this.character.x + 100, this.character.y + 100);
+      let bottle = new ThrowableBottle(
+        this.character.x + 100,
+        this.character.y + 100
+      );
       this.throwableObjects.push(bottle);
       console.log(this.throwableObjects);
     }
@@ -52,18 +67,17 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.ctx.translate(this.camera_x, 0);
-    
+
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.collectableItems);
     this.addObjectsToMap(this.throwableObjects);
-    
+
     this.ctx.translate(-this.camera_x, 0); //Back
     // ---- Space for fixed objects -----
-    this.addToMap(this.statusBar);
-    this.ctx.translate(this.camera_x, 0); 
-    
-    
+    this.addObjectsToMap(this.statusBar);
+    this.ctx.translate(this.camera_x, 0);
+
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
 
@@ -75,8 +89,6 @@ class World {
       self.draw();
     });
   }
-
-
 
   //add arrays with single objects
   addObjectsToMap(objects) {
@@ -91,13 +103,12 @@ class World {
       this.flipImage(object);
     }
     object.draw(this.ctx);
-    // object.drawFrame(this.ctx);
+    // object.drawFrame(this.ctx); 
 
     if (object.flippedGraphics) {
       this.flipImageBack(object);
     }
   }
-
 
   flipImage(object) {
     this.ctx.save();
@@ -110,6 +121,4 @@ class World {
     object.x = object.x * -1; // x-Achse drehen
     this.ctx.restore();
   }
-
-
 }

@@ -5,7 +5,7 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
-  statusBar = [new HealthBar(), new CoinBar(), new BottleBar()];
+  statusBar = [new HealthBar(), new CoinBar(), new BottleBar(), new EndBossBar()];
   throwableObjects = [];
 
   constructor(canvas, keyboard) {

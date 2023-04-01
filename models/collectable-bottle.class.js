@@ -2,7 +2,7 @@ class Bottle extends CollectableObject {
   height = 75;
   width = 75;
   y = 345;
-  collect_bottle_sound = new Audio("audio/collect_bottle.wav");
+  collect_sound = new Audio("audio/collect_bottle.wav");
 
     constructor() {
         super();

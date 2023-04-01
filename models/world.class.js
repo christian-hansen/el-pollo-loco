@@ -14,6 +14,8 @@ class World {
   throwableObjects = [];
   collectedBottles = 0;
   collectedCoins = 0;
+  collectBottle_sound = new Audio("audio/collect_bottle.wav");
+  collectCoin_sound = new Audio("audio/collect_coin.wav");
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -49,14 +51,20 @@ class World {
   // Enemy collion causes hit and reduces health bar
   checkCollection() {
     this.level.collectableItems.forEach((item) => {
-      if (this.character.isColliding(item) && item instanceof Bottle) {
+      if (this.character.isColliding(item) && item instanceof Bottle && !item.isCollected) {
+        // collectItem();
+        item.isCollected = true;
+        item.collect_sound.playbackRate = 2;
+        item.collect_sound.play();
         this.collectedBottles++;
-        //TODO collect only one bottle
         console.log(this.collectedBottles, "Bottles");
       }
-      if (this.character.isColliding(item) && item instanceof Coin) {
+      if (this.character.isColliding(item) && item instanceof Coin && !item.isCollected) {
+        // collectItem();
+        item.isCollected = true;
+        item.collect_sound.playbackRate = 2;
+        item.collect_sound.play();
         this.collectedCoins++;
-        //TODO collect only one coin
         console.log(this.collectedCoins, "Coins");
       }
     });
@@ -134,4 +142,12 @@ class World {
     object.x = object.x * -1; // x-Achse drehen
     this.ctx.restore();
   }
+
+  // collectItem(item) {
+  //       item.isCollected = true;
+  //       item.collect_sound.playbackRate = 2;
+  //       item.collect_sound.play();
+  // }
+
 }
+

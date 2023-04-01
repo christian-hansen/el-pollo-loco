@@ -3,7 +3,6 @@ collect_sound;
 
     constructor() {
         super();
-
       }
 
 
@@ -19,4 +18,10 @@ playAnimation(images) {
     this.currentImage++;
   }
 
+
+collectItem() {
+    this.isCollected = true;
+    this.collect_sound.playbackRate = 2;
+    this.collect_sound.play();
+  }
 }

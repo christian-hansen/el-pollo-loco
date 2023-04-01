@@ -4,8 +4,7 @@ class EndBossBar extends StatusBar {
 
 
   constructor() {
-    super();
-    this.loadImage('img/7_statusbars/2_statusbar_endboss/orange.png');
+    super().loadImage('img/7_statusbars/2_statusbar_endboss/orange.png');
     // this.setPercentage(0);
   }
 

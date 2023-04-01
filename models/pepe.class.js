@@ -43,6 +43,7 @@ class Pepe extends MovableObject {
   //TODO replace
   walking_sound = new Audio("audio/running_sand.wav");
 
+
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_WALKING);

@@ -5,8 +5,15 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
-  statusBar = [new HealthBar(), new CoinBar(), new BottleBar(), new EndBossBar()];
+  statusBar = [
+    new HealthBar(),
+    new CoinBar(),
+    new BottleBar(),
+    new EndBossBar(),
+  ];
   throwableObjects = [];
+  collectedBottles = 0;
+  collectedCoins = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -43,22 +50,28 @@ class World {
   checkCollection() {
     this.level.collectableItems.forEach((item) => {
       if (this.character.isColliding(item) && item instanceof Bottle) {
-        console.log(item, "Bottle collected");
+        this.collectedBottles++;
+        //TODO collect only one bottle
+        console.log(this.collectedBottles, "Bottles");
       }
       if (this.character.isColliding(item) && item instanceof Coin) {
-        console.log(item, "Coin collected");
+        this.collectedCoins++;
+        //TODO collect only one coin
+        console.log(this.collectedCoins, "Coins");
       }
     });
   }
 
   checkThrowObjects() {
-    if (this.keyboard.KEY_D) {
+    if (this.keyboard.KEY_D && this.collectedBottles > 0) {
       let bottle = new ThrowableBottle(
         this.character.x + 100,
         this.character.y + 100
       );
       this.throwableObjects.push(bottle);
       console.log(this.throwableObjects);
+      this.collectedBottles--;
+      console.log(this.collectedBottles);
     }
   }
 
@@ -103,7 +116,7 @@ class World {
       this.flipImage(object);
     }
     object.draw(this.ctx);
-    // object.drawFrame(this.ctx); 
+    // object.drawFrame(this.ctx);
 
     if (object.flippedGraphics) {
       this.flipImageBack(object);

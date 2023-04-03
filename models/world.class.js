@@ -52,20 +52,13 @@ class World {
   checkCollection() {
     this.level.collectableItems.forEach((item) => {
       if (this.character.isColliding(item) && item instanceof Bottle && !item.isCollected) {
-        // collectItem();
-        item.isCollected = true;
-        item.collect_sound.playbackRate = 2;
-        item.collect_sound.play();
+        item.collectItem();
         this.collectedBottles++;
-        console.log(this.collectedBottles, "Bottles");
+        this.statusBar[2].setPercentage(this.collectedBottles / 8 * 100);
       }
       if (this.character.isColliding(item) && item instanceof Coin && !item.isCollected) {
-        // collectItem();
-        item.isCollected = true;
-        item.collect_sound.playbackRate = 2;
-        item.collect_sound.play();
-        this.collectedCoins++;
-        console.log(this.collectedCoins, "Coins");
+        item.collectItem();
+        this.statusBar[1].setPercentage(this.collectedCoins / 4 * 100);
       }
     });
   }
@@ -77,9 +70,8 @@ class World {
         this.character.y + 100
       );
       this.throwableObjects.push(bottle);
-      console.log(this.throwableObjects);
       this.collectedBottles--;
-      console.log(this.collectedBottles);
+      this.statusBar[2].setPercentage(this.collectedBottles / 8 * 100);
     }
   }
 
@@ -124,7 +116,7 @@ class World {
       this.flipImage(object);
     }
     object.draw(this.ctx);
-    // object.drawFrame(this.ctx);
+    object.drawFrame(this.ctx);
 
     if (object.flippedGraphics) {
       this.flipImageBack(object);
@@ -142,12 +134,6 @@ class World {
     object.x = object.x * -1; // x-Achse drehen
     this.ctx.restore();
   }
-
-  // collectItem(item) {
-  //       item.isCollected = true;
-  //       item.collect_sound.playbackRate = 2;
-  //       item.collect_sound.play();
-  // }
 
 }
 

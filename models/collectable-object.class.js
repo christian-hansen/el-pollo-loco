@@ -23,5 +23,11 @@ collectItem() {
     this.isCollected = true;
     this.collect_sound.playbackRate = 2;
     this.collect_sound.play();
+    this.hideItem();
   }
+
+hideItem() {
+  this.height = 0;
+  this.width = 0;
+}
 }

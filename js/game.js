@@ -5,6 +5,7 @@ let keyboard = new Keyboard();
 let allIntervals = [];
 
 function init() {
+generateEndboss()
 canvas = document.getElementById('canvas');
 world = new World(canvas, keyboard)
 

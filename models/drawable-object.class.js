@@ -19,7 +19,7 @@ class DrawableObject {
   }
 
   drawFrame(ctx) {
-    if (this instanceof Pepe || this instanceof Chicken || this instanceof Endboss || this instanceof Coin || this instanceof Bottle) {
+    if (this instanceof Pepe || this instanceof Chicken || this instanceof Smallchicken || this instanceof Endboss || this instanceof Coin || this instanceof Bottle) {
     ctx.beginPath();
     ctx.lineWidth = "1";
     ctx.strokeStyle = "blue";
@@ -29,7 +29,7 @@ class DrawableObject {
   }
 
   drawHitBox(ctx) {
-    if (this instanceof Pepe || this instanceof Chicken || this instanceof Endboss || this instanceof Coin || this instanceof Bottle) {
+    if (this instanceof Pepe || this instanceof Chicken || this instanceof Smallchicken || this instanceof Endboss || this instanceof Coin || this instanceof Bottle) {
     ctx.beginPath();
     ctx.lineWidth = "1";
     ctx.strokeStyle = "red";

@@ -14,8 +14,7 @@ class World {
   throwableObjects = [];
   collectedBottles = 0;
   collectedCoins = 0;
-  collectBottle_sound = new Audio("audio/collect_bottle.wav");
-  collectCoin_sound = new Audio("audio/collect_coin.wav");
+  endboss;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -41,7 +40,8 @@ class World {
   // Enemy collion causes hit and reduces health bar
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      // console.log(enemy); //TODO isColliding with offsets not working
+      if (this.character.isCollidingEnemy(enemy)) {
         this.character.hit();
         this.statusBar[0].setPercentage(this.character.energy);
       }
@@ -93,6 +93,7 @@ class World {
 
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.endboss);
 
     this.ctx.translate(-this.camera_x, 0); //Back
 
@@ -117,6 +118,7 @@ class World {
     }
     object.draw(this.ctx);
     object.drawFrame(this.ctx);
+    object.drawHitBox(this.ctx);
 
     if (object.flippedGraphics) {
       this.flipImageBack(object);

@@ -2,6 +2,12 @@ class Endboss extends MovableObject {
     y = 135;
     height = 300;
     width = 280;
+    offset = {
+        top: 50,
+        bottom: 65,
+        left: 30,
+        right: 20
+    };
 
     IMAGES_WALKING = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -42,14 +48,13 @@ class Endboss extends MovableObject {
 
 
     constructor() {
-        super().loadImage(this.IMAGES_WALKING[0])
-        this.loadImages(this.IMAGES_WALKING);
+        super().loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
 
-        this.x = 2200; //2460
+        this.x = 2460;
         this.speed = 10;
     
         this.animate();
@@ -72,9 +77,9 @@ class Endboss extends MovableObject {
                 // if (i > 10) {this.playAnimation(this.IMAGES_ALERT);}
                 // //TODO if Abstand kleiner als XYZ dann ATTACK 
                 // if (i > 20) {this.playAnimation(this.IMAGES_ATTACK);}
-                // //TODO if Abstand kleiner als XYZ dann ATTACK 
+                // //TODO if gotHit dann HURT 
                 // if (i > 30) {this.playAnimation(this.IMAGES_HURT);}    
-                // //TODO if Abstand kleiner als XYZ dann ATTACK       
+                // //TODO if energy 0 dann DEAD       
                 // if (i > 40) {this.playAnimation(this.IMAGES_DEAD);}   
 
                 i++;

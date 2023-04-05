@@ -24,7 +24,7 @@ class MovableObject extends DrawableObject {
     else return this.y < this.ground;
   }
 
-
+  //TODO
   // isColliding(obj) {
   //   return (
   //     this.x + this.width >= obj.x &&

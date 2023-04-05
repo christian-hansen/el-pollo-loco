@@ -47,25 +47,24 @@ function generateLevel() {
 }
 
 function generateBackground() {
-  for (let i = 0; i <= levelLength; i++) {
+  for (let i = 0; i < levelLength; i++) {
     for (let j = 0; j < backgroundImg.length; j++) {
       if (j < 4) {
-        backgroundObject = new BackgroundObject(
-          backgroundImg[j],
-          backgroundWidth * (i * 2 - 1),
-          0
-        );
+        backgroundObject = new BackgroundObject(backgroundImg[j],backgroundWidth * (i * 2 - 1),0);
       } else {
-        backgroundObject = new BackgroundObject(
-          backgroundImg[j],
-          backgroundWidth * (i * 2),
-          0
-        );
+        backgroundObject = new BackgroundObject(backgroundImg[j],backgroundWidth * (i * 2), 0);
       }
       backgroundObjects.push(backgroundObject);
     }
   }
-  console.log(backgroundObjects);
+}
+
+function generateClouds() {
+  for (let i = 0; i < amountClouds; i++) {
+    let cloudLocation = backgroundWidth * (i + 1) - 500;
+    let cloud = new Cloud(cloudLocation);
+    clouds.push(cloud);
+  }
 }
 
 function generateEndboss() {
@@ -84,13 +83,7 @@ function generateEnemies() {
   }
 }
 
-function generateClouds() {
-  for (let i = 0; i < amountClouds; i++) {
-    let cloudLocation = backgroundWidth * (i + 1) - 500;
-    let cloud = new Cloud(cloudLocation);
-    clouds.push(cloud);
-  }
-}
+
 
 function generateCollectableItems() {
   generateCollectableCoins();
@@ -105,10 +98,6 @@ function generateCollectableCoins() {
   }
 }
 
-/**
- * This function generates a specified number of collectable bottles and adds them to an array of
- * collectable objects.
- */
 function generateCollectableBottles() {
   for (let i = 0; i < amountCollectableBottles; i++) {
     let location = (backgroundWidth - 550) * (i + 1);

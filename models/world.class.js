@@ -33,6 +33,8 @@ class World {
     setStoppableInterval(() => {
       this.checkCollisions();
       this.checkCollection();
+    }, 50);
+    setStoppableInterval(() => {
       this.checkThrowObjects();
     }, 200);
   }
@@ -41,7 +43,7 @@ class World {
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       // console.log(enemy); //TODO isColliding with offsets not working
-      if (this.character.isCollidingEnemy(enemy)) {
+      if (this.character.isColliding(enemy)) {
         this.character.hit();
         this.statusBar[0].setPercentage(this.character.energy);
       }
@@ -63,8 +65,10 @@ class World {
     });
   }
 
+  
+//TODO Last throw is...
   checkThrowObjects() {
-    if (this.keyboard.KEY_D && this.collectedBottles > 0) {
+    if (this.keyboard.KEY_D && this.collectedBottles > 0  ) {
       let bottle = new ThrowableBottle(
         this.character.x + 100,
         this.character.y + 100

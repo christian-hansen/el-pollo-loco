@@ -28,7 +28,11 @@ new BackgroundObject("img/5_background/layers/2_second_layer/2.png", 719 * 3, 0)
 new BackgroundObject("img/5_background/layers/1_first_layer/2.png", 719 * 3, 0),
 ];
 const collectableObjects = [new Coin(), new Coin(), new Coin(), new Coin(), new Bottle(), new Bottle(), new Bottle(), new Bottle(), new Bottle(), new Bottle(), new Bottle(), new Bottle()];
-const enemies = [new Chicken(), new Smallchicken(),new Chicken(), new Smallchicken(), new Smallchicken(), new Chicken()];
+const enemies = [
+  new Chicken(), 
+  new Smallchicken()
+  ,new Chicken(), new Smallchicken(), new Smallchicken(), new Chicken()
+  ];
 let endboss = [];
 
 

@@ -25,22 +25,31 @@ class MovableObject extends DrawableObject {
   }
 
 
-  isColliding(obj) {
-    return (
-      this.x + this.width >= obj.x &&
-      this.y + this.height > obj.y &&
-      this.x < obj.x &&
-      this.y < obj.y + obj.height
-    );
-  }
+  // isColliding(obj) {
+  //   return (
+  //     this.x + this.width >= obj.x &&
+  //     this.y + this.height > obj.y &&
+  //     this.x < obj.x &&
+  //     this.y < obj.y + obj.height
+  //   );
+  // }
 
   //TODO
-  isCollidingEnemy(obj) {
+  isColliding(obj) {
+    // console.log("X width", this.x + this.width - this.offset.right, obj.x + obj.offset.left);
+    // console.log(this.x + this.width - this.offset.right >= obj.x + obj.offset.left);
+    // console.log("Y Height", this.y + this.height, obj.y + obj.offset.top);
+    // console.log("Y Height", this.y + this.height - this.offset.bottom + 80 + 75, obj.y + obj.offset.top);
+    // console.log(this.y + this.height > obj.y + obj.offset.top);
+    // console.log("Y top", this.y + this.offset.top, obj.y + obj.height - obj.offset.bottom);
+    // console.log(this.y + this.offset.top < obj.y + obj.height - obj.offset.bottom);
+    // console.log("X Left", this.x + this.offset.left, obj.x + obj.width - obj.offset.right);
+    // console.log(this.x + this.offset.left < obj.x + obj.width - obj.offset.right);
     return (
       this.x + this.width - this.offset.right >= obj.x + obj.offset.left &&
-      this.y + this.height - this.offset.bottom > obj.y + obj.offset.top &&
+      this.y + this.height > obj.y + obj.offset.top && 
       this.x + this.offset.left < obj.x + obj.width - obj.offset.right &&
-      this.y + this.offset.top < obj.y + obj.height - obj.offset.bottom
+      this.y + this.offset.top < obj.y + obj.height 
     );
   }
 

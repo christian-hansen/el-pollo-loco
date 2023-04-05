@@ -99,7 +99,10 @@ class Pepe extends MovableObject {
   }
 
   playCharacterAnimations() {
-    if (this.isDead()) this.playAnimation(this.IMAGES_DEAD);
+    if (this.isDead()) {
+      this.playAnimation(this.IMAGES_DEAD)
+      stopGame();
+    }
     else if (this.isHurt()) this.playAnimation(this.IMAGES_HURT);
     else if (this.isAboveGround()) this.playAnimation(this.IMAGES_JUMPING);
     else if (this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT) this.playAnimation(this.IMAGES_WALKING);

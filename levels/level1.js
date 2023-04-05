@@ -62,7 +62,8 @@ function generateBackground() {
 function generateClouds() {
   for (let i = 0; i < amountClouds; i++) {
     let cloudLocation = backgroundWidth * (i + 1) - 500;
-    let cloud = new Cloud(cloudLocation);
+    let imageNumber = Math.round(Math.random()); // either 0 or 1
+    let cloud = new Cloud(cloudLocation, imageNumber);
     clouds.push(cloud);
   }
 }

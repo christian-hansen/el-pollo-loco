@@ -5,9 +5,14 @@ let keyboard = new Keyboard();
 let allIntervals = [];
 
 function init() {
-generateLevel()
+    document.getElementById('startscreen').classList.remove('d-none');
+}
 
+function startGame() {
+generateLevel()
+document.getElementById('startscreen').classList.add('d-none');
 canvas = document.getElementById('canvas');
+canvas.classList.remove('d-none');
 world = new World(canvas, keyboard)
 
 console.log("My character is", world.character);

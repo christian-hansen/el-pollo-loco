@@ -11,8 +11,7 @@ class CoinBar extends StatusBar {
   ];
 
   constructor() {
-    super();
-    this.loadImages(this.IMAGES);
+    super().loadImages(this.IMAGES);
     this.setPercentage(0);
   }
 

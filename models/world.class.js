@@ -32,8 +32,10 @@ class World {
   run() {
     setStoppableInterval(() => {
       this.checkCollisions();
+    }, 100);
+    setStoppableInterval(() => {
       this.checkCollection();
-    }, 50);
+    }, 25);
     setStoppableInterval(() => {
       this.checkThrowObjects();
     }, 200);
@@ -42,7 +44,6 @@ class World {
   // Enemy collion causes hit and reduces health bar
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      // console.log(enemy); //TODO isColliding with offsets not working
       if (this.character.isColliding(enemy)) {
         this.character.hit();
         this.statusBar[0].setPercentage(this.character.energy);
@@ -53,29 +54,37 @@ class World {
   // Enemy collion causes hit and reduces health bar
   checkCollection() {
     this.level.collectableItems.forEach((item) => {
-      if (this.character.isColliding(item) && item instanceof Bottle && !item.isCollected) {
+      if (
+        this.character.isColliding(item) &&
+        item instanceof Bottle &&
+        !item.isCollected
+      ) {
         item.collectItem();
         this.collectedBottles++;
-        this.statusBar[2].setPercentage(this.collectedBottles / 8 * 100);
+        this.statusBar[2].setPercentage((this.collectedBottles / amountCollectableBottles) * 100);
       }
-      if (this.character.isColliding(item) && item instanceof Coin && !item.isCollected) {
+      if (
+        this.character.isColliding(item) &&
+        item instanceof Coin &&
+        !item.isCollected
+      ) {
         item.collectItem();
-        this.statusBar[1].setPercentage(this.collectedCoins / 4 * 100);
+        this.collectedCoins++;
+        this.statusBar[1].setPercentage((this.collectedCoins / amountCollectableCoins) * 100);
       }
     });
   }
 
-  
-//TODO Last throw is...
+  //TODO Last throw is...
   checkThrowObjects() {
-    if (this.keyboard.KEY_D && this.collectedBottles > 0  ) {
+    if (this.keyboard.KEY_D && this.collectedBottles > 0) {
       let bottle = new ThrowableBottle(
         this.character.x + 100,
         this.character.y + 100
       );
       this.throwableObjects.push(bottle);
       this.collectedBottles--;
-      this.statusBar[2].setPercentage(this.collectedBottles / 8 * 100);
+      this.statusBar[2].setPercentage((this.collectedBottles / 8) * 100);
     }
   }
 
@@ -140,6 +149,4 @@ class World {
     object.x = object.x * -1; // x-Achse drehen
     this.ctx.restore();
   }
-
 }
-

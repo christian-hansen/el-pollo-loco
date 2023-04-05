@@ -14,10 +14,10 @@ IMAGES = [
   'img/8_coin/coin_1.png',
   'img/8_coin/coin_2.png',
 ]
-    constructor() {
+    constructor(x) {
         super().loadImages(this.IMAGES);
-        this.x = 200 + Math.random() * 1000;
-        this.y = 245 - Math.random() * 200;
+        this.x = x + Math.random() * 400;
+        this.y = 300 - Math.random() * 200;
         this.animate();
       }
 

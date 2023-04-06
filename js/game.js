@@ -26,13 +26,22 @@ function setStoppableInterval(fn, time) {
 
 
 function stopGame() {
-    // Intervalle Stoppen
     clearAllIntervals();
 }
 
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
   };
+
+function showEndScreen() {
+    setTimeout(() => {
+        document.getElementById('canvas').classList.add('d-none');
+        document.getElementById('endscreen').classList.remove('d-none');
+    }, 1000);
+
+}
+
+
 
 
 window.addEventListener('keydown', (event) => {

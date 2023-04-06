@@ -53,8 +53,8 @@ class MovableObject extends DrawableObject {
     );
   }
 
-  hit() {
-    this.energy -= 5;
+  hit(damage) {
+    this.energy -= damage;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
@@ -78,6 +78,14 @@ class MovableObject extends DrawableObject {
 
   moveRight() {
     this.x += this.speed;
+  }
+
+  moveDown(fallspeed){
+    this.y += fallspeed;
+  }
+
+  moveUp(fallspeed){
+    this.y -= fallspeed;
   }
 
   playAnimation(images) {

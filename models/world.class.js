@@ -31,7 +31,9 @@ class World {
 
   run() {
     setStoppableInterval(() => {
-      this.checkCollisions();
+      this.checkEnemyCollision();
+      this.checkEndbossCollision();
+      this.checkEndbossBottleCollision();
     }, 100);
     setStoppableInterval(() => {
       this.checkCollection();
@@ -42,11 +44,30 @@ class World {
   }
 
   // Enemy collion causes hit and reduces health bar
-  checkCollisions() {
+  checkEnemyCollision() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        this.character.hit();
+        this.character.hit(5);
         this.statusBar[0].setPercentage(this.character.energy);
+      }
+    });
+  }
+
+  checkEndbossCollision() {
+    this.level.endboss.forEach((endboss) => {
+      if (this.character.isColliding(endboss)) {
+        this.character.hit(20);
+        this.statusBar[0].setPercentage(this.character.energy);
+      }
+    });
+  }
+
+  checkEndbossBottleCollision() {
+    this.throwableObjects.forEach((bottle) => {
+      if (this.level.endboss[0].isColliding(bottle)) {
+        this.level.endboss[0].hit(10);
+        console.log(this.level.endboss[0].energy);
+        this.statusBar[3].setPercentage(this.character.energy);
       }
     });
   }

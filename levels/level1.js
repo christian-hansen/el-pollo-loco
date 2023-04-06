@@ -23,8 +23,8 @@ const backgroundWidth = 719;
 const clouds = [];
 
 //Collectable Items
-const amountCollectableBottles = 8;
-const amountCollectableCoins = 5;
+const amountCollectableBottles = 10;
+const amountCollectableCoins = 10;
 const collectableObjects = [];
 
 //Level Setup

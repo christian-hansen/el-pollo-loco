@@ -21,7 +21,7 @@ class Pepe extends MovableObject {
     "img/2_character_pepe/1_idle/idle/I-7.png",
     "img/2_character_pepe/1_idle/idle/I-8.png",
     "img/2_character_pepe/1_idle/idle/I-9.png",
-    "img/2_character_pepe/1_idle/idle/I-10.png"
+    "img/2_character_pepe/1_idle/idle/I-10.png",
   ];
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
@@ -56,22 +56,21 @@ class Pepe extends MovableObject {
     "img/2_character_pepe/5_dead/D-56.png",
     "img/2_character_pepe/5_dead/D-57.png",
   ];
-  
+
   IMAGES_LONGIDLE = [
-'img/2_character_pepe/1_idle/long_idle/I-11.png',
-'img/2_character_pepe/1_idle/long_idle/I-12.png',
-'img/2_character_pepe/1_idle/long_idle/I-13.png',
-'img/2_character_pepe/1_idle/long_idle/I-14.png',
-'img/2_character_pepe/1_idle/long_idle/I-15.png',
-'img/2_character_pepe/1_idle/long_idle/I-16.png',
-'img/2_character_pepe/1_idle/long_idle/I-17.png',
-'img/2_character_pepe/1_idle/long_idle/I-18.png',
-'img/2_character_pepe/1_idle/long_idle/I-19.png',
-'img/2_character_pepe/1_idle/long_idle/I-20.png',
+    "img/2_character_pepe/1_idle/long_idle/I-11.png",
+    "img/2_character_pepe/1_idle/long_idle/I-12.png",
+    "img/2_character_pepe/1_idle/long_idle/I-13.png",
+    "img/2_character_pepe/1_idle/long_idle/I-14.png",
+    "img/2_character_pepe/1_idle/long_idle/I-15.png",
+    "img/2_character_pepe/1_idle/long_idle/I-16.png",
+    "img/2_character_pepe/1_idle/long_idle/I-17.png",
+    "img/2_character_pepe/1_idle/long_idle/I-18.png",
+    "img/2_character_pepe/1_idle/long_idle/I-19.png",
+    "img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
   world; // damit kann der Charakter auf die Variablen der World zugreifen
   walking_sound = new Audio("audio/running_sand.wav");
-
 
   constructor() {
     super().loadImages(this.IMAGES_IDLE);
@@ -100,19 +99,26 @@ class Pepe extends MovableObject {
 
   playCharacterAnimations() {
     if (this.isDead()) {
-      this.playAnimation(this.IMAGES_DEAD)
-      stopGame();
-    }
-    else if (this.isHurt()) this.playAnimation(this.IMAGES_HURT);
+      this.playPepeDying();
+      setTimeout(() => {
+        stopGame();
+      }, 2000);
+      setTimeout(() => {
+        showEndScreen();
+      }, 2000);
+      // setStoppableInterval(() => this.playAnimation(this.IMAGES_DEAD), 8000 / 60);
+    } else if (this.isHurt()) this.playAnimation(this.IMAGES_HURT);
     else if (this.isAboveGround()) this.playAnimation(this.IMAGES_JUMPING);
-    else if (this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT) this.playAnimation(this.IMAGES_WALKING);
+    else if (this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT)
+      this.playAnimation(this.IMAGES_WALKING);
     else this.playAnimation(this.IMAGES_IDLE);
   }
 
-
   // Start movement functions
   canMoveRight() {
-    return this.world.keyboard.KEY_RIGHT && this.x < this.world.level.end_of_level_x;
+    return (
+      this.world.keyboard.KEY_RIGHT && this.x < this.world.level.end_of_level_x
+    );
   }
 
   moveRight() {
@@ -133,5 +139,10 @@ class Pepe extends MovableObject {
 
   canJump() {
     return this.world.keyboard.KEY_SPACE && !this.isAboveGround();
+  }
+
+  playPepeDying() {
+    this.playAnimation(this.IMAGES_DEAD);
+    this.moveDown(30);
   }
 }

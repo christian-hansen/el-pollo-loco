@@ -74,19 +74,13 @@ class Endboss extends MovableObject {
         i = 25;
       }
       i++;
-      console.log(i);
     }, 150);
   }
 
   playEndbossAnmiations() {
     if (this.isDead()) {
       this.playEndbossDying();
-      setTimeout(() => {
-        stopGame();
-      }, 2000);
-      setTimeout(() => {
-        showEndScreen();
-      }, 2000);
+      this.endGame();
     } else if (this.isHurt()) this.playAnimation(this.IMAGES_HURT);
   }
 

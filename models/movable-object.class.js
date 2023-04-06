@@ -98,4 +98,13 @@ class MovableObject extends DrawableObject {
   jump() {
     this.speedY = 15;
   }
+
+  endGame() {
+    setTimeout(() => {
+      stopGame();
+      setTimeout(() => {
+        showEndScreen();
+      }, 1000);
+    }, 2500);
+  }
 }

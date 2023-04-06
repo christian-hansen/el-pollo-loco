@@ -67,7 +67,7 @@ class World {
       if (this.level.endboss[0].isColliding(bottle)) {
         this.level.endboss[0].hit(10);
         console.log(this.level.endboss[0].energy);
-        this.statusBar[3].setPercentage(this.character.energy);
+        this.statusBar[3].setPercentage(this.level.endboss[0].energy);
       }
     });
   }
@@ -170,4 +170,7 @@ class World {
     object.x = object.x * -1; // x-Achse drehen
     this.ctx.restore();
   }
+
+  
+
 }

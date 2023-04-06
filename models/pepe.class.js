@@ -100,18 +100,16 @@ class Pepe extends MovableObject {
   playCharacterAnimations() {
     if (this.isDead()) {
       this.playPepeDying();
-      setTimeout(() => {
-        stopGame();
-      }, 2000);
-      setTimeout(() => {
-        showEndScreen();
-      }, 2000);
-      // setStoppableInterval(() => this.playAnimation(this.IMAGES_DEAD), 8000 / 60);
-    } else if (this.isHurt()) this.playAnimation(this.IMAGES_HURT);
-    else if (this.isAboveGround()) this.playAnimation(this.IMAGES_JUMPING);
-    else if (this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT)
+      this.endGame();
+    } else if (this.isHurt()) {
+      this.playAnimation(this.IMAGES_HURT);
+    } else if (this.isAboveGround()) {
+      this.playAnimation(this.IMAGES_JUMPING);
+    } else if (this.isMoving()) {
       this.playAnimation(this.IMAGES_WALKING);
-    else this.playAnimation(this.IMAGES_IDLE);
+    } else {
+      this.playAnimation(this.IMAGES_IDLE);
+    }
   }
 
   // Start movement functions
@@ -137,12 +135,21 @@ class Pepe extends MovableObject {
     this.flippedGraphics = true;
   }
 
+  isMoving() {
+    this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT;
+  }
+
   canJump() {
     return this.world.keyboard.KEY_SPACE && !this.isAboveGround();
   }
 
   playPepeDying() {
     this.playAnimation(this.IMAGES_DEAD);
-    this.moveDown(30);
+    setTimeout(() => {
+      this.moveUp(50);
+      setTimeout(() => {
+        this.moveDown(150);
+      }, 1000);
+    }, 1000);
   }
 }

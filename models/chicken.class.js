@@ -13,6 +13,7 @@ class Chicken extends MovableObject {
     "img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
     "img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
   ];
+  IMAGE_DEAD = "img/3_enemies_chicken/chicken_normal/2_dead/dead.png";
 
   constructor(x) {
     super().loadImages(this.IMAGES_WALKING);
@@ -29,4 +30,5 @@ class Chicken extends MovableObject {
     
     setInterval(() => this.playAnimation(this.IMAGES_WALKING), 200);
   }
+
 }

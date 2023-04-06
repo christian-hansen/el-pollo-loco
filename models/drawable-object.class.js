@@ -50,4 +50,9 @@ class DrawableObject {
       this.imageCache[path] = img;
     });
   }
+  
+  removeItem() {
+    this.height = 0;
+    this.width = 0;
+  }
 }

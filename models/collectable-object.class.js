@@ -23,11 +23,7 @@ collectItem() {
     this.isCollected = true;
     this.collect_sound.playbackRate = 2;
     this.collect_sound.play();
-    this.hideCollectedItem();
+    this.removeItem();
   }
 
-  hideCollectedItem() {
-  this.height = 0;
-  this.width = 0;
-}
 }

@@ -1,5 +1,4 @@
 class MovableObject extends DrawableObject {
-
   framerate = 60;
   speed = 0.15;
   flippedGraphics = false;
@@ -8,6 +7,8 @@ class MovableObject extends DrawableObject {
   ground;
   energy = 100;
   lastHit = 0;
+  IMAGE_DEAD;
+  isAlive = true;
 
   //Gravitation
   applyGravity() {
@@ -20,9 +21,18 @@ class MovableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    if (this instanceof ThrowableObject) return true;
-    else return this.y < this.ground;
+    if (this instanceof ThrowableObject) {
+      return true;
+    } else {
+      return this.y < this.ground;
+    }
   }
+
+  isJumping() {
+      return this.y - this.ground < 0;
+    }
+
+
 
   //TODO
   // isColliding(obj) {
@@ -36,20 +46,19 @@ class MovableObject extends DrawableObject {
 
   //TODO
   isColliding(obj) {
-    // console.log("X width", this.x + this.width - this.offset.right, obj.x + obj.offset.left);
-    // console.log(this.x + this.width - this.offset.right >= obj.x + obj.offset.left);
-    // console.log("Y Height", this.y + this.height, obj.y + obj.offset.top);
-    // console.log("Y Height", this.y + this.height - this.offset.bottom + 80 + 75, obj.y + obj.offset.top);
-    // console.log(this.y + this.height > obj.y + obj.offset.top);
-    // console.log("Y top", this.y + this.offset.top, obj.y + obj.height - obj.offset.bottom);
-    // console.log(this.y + this.offset.top < obj.y + obj.height - obj.offset.bottom);
-    // console.log("X Left", this.x + this.offset.left, obj.x + obj.width - obj.offset.right);
-    // console.log(this.x + this.offset.left < obj.x + obj.width - obj.offset.right);
     return (
       this.x + this.width - this.offset.right >= obj.x + obj.offset.left &&
-      this.y + this.height > obj.y + obj.offset.top && 
-      this.x + this.offset.left < obj.x + obj.width - obj.offset.right &&
-      this.y + this.offset.top < obj.y + obj.height 
+      this.y + this.height > obj.y + obj.offset.top &&
+      this.x + this.offset.left - obj.width / 2 <
+      obj.x + obj.width - obj.offset.right &&
+      this.y + this.offset.top < obj.y + obj.height
+    );
+  }
+
+  isJumpedOn(obj) {
+    return (
+      this.y + this.height > obj.y + obj.offset.top &&
+      this.y + this.offset.top < obj.y + obj.height
     );
   }
 
@@ -72,6 +81,12 @@ class MovableObject extends DrawableObject {
     return this.energy == 0;
   }
 
+  isKilled() {
+    this.isAlive = false;
+    this.loadImage(this.IMAGE_DEAD); //TODO switches back to walkanimation
+    this.speed = 0;
+  }
+
   moveLeft() {
     this.x -= this.speed;
   }
@@ -80,11 +95,11 @@ class MovableObject extends DrawableObject {
     this.x += this.speed;
   }
 
-  moveDown(fallspeed){
+  moveDown(fallspeed) {
     this.y += fallspeed;
   }
 
-  moveUp(fallspeed){
+  moveUp(fallspeed) {
     this.y -= fallspeed;
   }
 

@@ -34,6 +34,7 @@ class World {
       this.checkEnemyCollision();
       this.checkEndbossCollision();
       this.checkEndbossBottleCollision();
+      // this.checkEnemyJumpedOn();
     }, 100);
     setStoppableInterval(() => {
       this.checkCollection();
@@ -45,13 +46,28 @@ class World {
 
   // Enemy collion causes hit and reduces health bar
   checkEnemyCollision() {
-    this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
-        this.character.hit(5);
-        this.statusBar[0].setPercentage(this.character.energy);
-      }
-    });
+      this.level.enemies.forEach((enemy) => {
+        if (this.character.isJumping() && this.character.isColliding(enemy) && enemy.isAlive) {
+          console.log("jumped on");
+          enemy.isKilled();
+        }
+        if (this.character.isColliding(enemy) && enemy.isAlive) {
+              this.character.hit(5);
+              this.statusBar[0].setPercentage(this.character.energy);
+            }
+      });
   }
+
+  // checkEnemyJumpedOn() {
+  //   this.level.enemies.forEach((enemy) => {
+  //     if (this.character.isJumpedOn(enemy)) {
+  //       console.log("jumped on");
+        // enemy.isKilled()
+        // this.character.hit(0);
+        // this.statusBar[0].setPercentage(this.character.energy);
+  //     }
+  //   });
+  // }
 
   checkEndbossCollision() {
     this.level.endboss.forEach((endboss) => {

@@ -7,7 +7,7 @@ class MovableObject extends DrawableObject {
   ground;
   energy = 100;
   lastHit = 0;
-  IMAGE_DEAD;
+  IMAGES_DEAD;
   isAlive = true;
 
   //Gravitation
@@ -83,7 +83,6 @@ class MovableObject extends DrawableObject {
 
   isKilled() {
     this.isAlive = false;
-    this.loadImage(this.IMAGE_DEAD); //TODO switches back to walkanimation
     this.speed = 0;
   }
 
@@ -122,4 +121,11 @@ class MovableObject extends DrawableObject {
       }, 1000);
     }, 2500);
   }
+
+
+playEnemyDying() {
+  this.playAnimation(this.IMAGES_DEAD);
+  this.moveDown(30);
+}
+
 }

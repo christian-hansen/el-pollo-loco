@@ -46,28 +46,20 @@ class World {
 
   // Enemy collion causes hit and reduces health bar
   checkEnemyCollision() {
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isJumping() && this.character.isColliding(enemy) && enemy.isAlive) {
-          console.log("jumped on");
-          enemy.isKilled();
-        }
-        if (this.character.isColliding(enemy) && enemy.isAlive) {
-              this.character.hit(5);
-              this.statusBar[0].setPercentage(this.character.energy);
-            }
-      });
+    this.level.enemies.forEach((enemy) => {
+      if (
+        this.character.isJumping() &&
+        this.character.isColliding(enemy)
+      ) {
+        enemy.isKilled();
+        this.character.bounceUp();
+      }
+      if (this.character.isColliding(enemy)) {
+        this.character.hit(5);
+        this.statusBar[0].setPercentage(this.character.energy);
+      }
+    });
   }
-
-  // checkEnemyJumpedOn() {
-  //   this.level.enemies.forEach((enemy) => {
-  //     if (this.character.isJumpedOn(enemy)) {
-  //       console.log("jumped on");
-        // enemy.isKilled()
-        // this.character.hit(0);
-        // this.statusBar[0].setPercentage(this.character.energy);
-  //     }
-  //   });
-  // }
 
   checkEndbossCollision() {
     this.level.endboss.forEach((endboss) => {
@@ -82,7 +74,6 @@ class World {
     this.throwableObjects.forEach((bottle) => {
       if (this.level.endboss[0].isColliding(bottle)) {
         this.level.endboss[0].hit(10);
-        console.log(this.level.endboss[0].energy);
         this.statusBar[3].setPercentage(this.level.endboss[0].energy);
       }
     });
@@ -98,7 +89,9 @@ class World {
       ) {
         item.collectItem();
         this.collectedBottles++;
-        this.statusBar[2].setPercentage((this.collectedBottles / amountCollectableBottles) * 100);
+        this.statusBar[2].setPercentage(
+          (this.collectedBottles / amountCollectableBottles) * 100
+        );
       }
       if (
         this.character.isColliding(item) &&
@@ -107,7 +100,9 @@ class World {
       ) {
         item.collectItem();
         this.collectedCoins++;
-        this.statusBar[1].setPercentage((this.collectedCoins / amountCollectableCoins) * 100);
+        this.statusBar[1].setPercentage(
+          (this.collectedCoins / amountCollectableCoins) * 100
+        );
       }
     });
   }
@@ -168,7 +163,7 @@ class World {
     }
     object.draw(this.ctx);
     // object.drawFrame(this.ctx);
-    object.drawHitBox(this.ctx);
+    // object.drawHitBox(this.ctx);
 
     if (object.flippedGraphics) {
       this.flipImageBack(object);
@@ -186,7 +181,4 @@ class World {
     object.x = object.x * -1; // x-Achse drehen
     this.ctx.restore();
   }
-
-  
-
 }

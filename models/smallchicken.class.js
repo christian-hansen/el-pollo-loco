@@ -21,17 +21,13 @@ class Smallchicken extends MovableObject {
     this.x = x + Math.random() * 400;
     this.speed = 0.15 + Math.random() * 0.3;
 
-    this.animate();
+    this.animateEnemy();
   }
 
-  animate() {
-    if(this.isAlive){
-      setInterval(() => this.moveLeft(), 1000/60);
-      setInterval(() => this.playAnimation(this.IMAGES_WALKING), 200);
-    } else {
-      this.playEnemyDying();
-    }
-  }
+  // animate() {
+  //     setInterval(() => this.moveLeft(), 1000/60);
+  //     setInterval(() => this.playAnimation(this.IMAGES_WALKING), 200);
+  // }
 
 
 }

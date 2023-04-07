@@ -29,24 +29,15 @@ class MovableObject extends DrawableObject {
   }
 
   isJumping() {
-      return this.y - this.ground < 0;
+      return this.y - this.ground < -30;
     }
 
 
 
   //TODO
-  // isColliding(obj) {
-  //   return (
-  //     this.x + this.width >= obj.x &&
-  //     this.y + this.height > obj.y &&
-  //     this.x < obj.x &&
-  //     this.y < obj.y + obj.height
-  //   );
-  // }
-
-  //TODO
   isColliding(obj) {
     return (
+      (obj.isAlive || obj instanceof Coin || obj instanceof Bottle) &&
       this.x + this.width - this.offset.right >= obj.x + obj.offset.left &&
       this.y + this.height > obj.y + obj.offset.top &&
       this.x + this.offset.left - obj.width / 2 <
@@ -57,6 +48,7 @@ class MovableObject extends DrawableObject {
 
   isJumpedOn(obj) {
     return (
+      obj.isAlive &&
       this.y + this.height > obj.y + obj.offset.top &&
       this.y + this.offset.top < obj.y + obj.height
     );
@@ -113,6 +105,10 @@ class MovableObject extends DrawableObject {
     this.speedY = 15;
   }
 
+  bounceUp() {
+    this.speedY = 15;
+  }
+
   endGame() {
     setTimeout(() => {
       stopGame();
@@ -122,10 +118,35 @@ class MovableObject extends DrawableObject {
     }, 2500);
   }
 
+  animateEnemy() {
+    this.moveEnemyLeft();
+    this.playEnemyAnimation();
+  }
 
-playEnemyDying() {
-  this.playAnimation(this.IMAGES_DEAD);
-  this.moveDown(30);
-}
+  moveEnemyLeft() {
+    setInterval(() => {
+      if (this.isAlive) {
+        this.moveLeft();
+      } else clearInterval();
+    }, 1000 / 60);
+  }
+
+  playEnemyAnimation() {
+    setInterval(() => {
+      if (this.isAlive) {
+        this.playAnimation(this.IMAGES_WALKING);
+      } else {
+        this.stopEnemyAnimation();
+      }
+    }, 200);
+  }
+
+  stopEnemyAnimation() {
+    clearInterval();
+    this.playAnimation(this.IMAGES_DEAD);
+    setTimeout(() => {
+      this.moveDown(50);
+    }, 1800);
+  }
 
 }

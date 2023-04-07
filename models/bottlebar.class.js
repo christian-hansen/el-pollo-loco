@@ -15,7 +15,7 @@ class BottleBar extends StatusBar {
     this.loadImages(this.IMAGES);
     this.setPercentage(0);
   }
-  
+
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

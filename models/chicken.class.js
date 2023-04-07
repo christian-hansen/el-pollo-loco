@@ -23,6 +23,4 @@ class Chicken extends MovableObject {
 
     this.animateEnemy();
   }
-
-
 }

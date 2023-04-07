@@ -69,40 +69,54 @@ class Endboss extends MovableObject {
         i = 0;
         hadFirstContact = true;
       }
-      this.repeatAlertAttack(i);
+      this.playEndbossAnimationLoop(i);
       if (i === 65) {
-        i = 25;
+        i = 25; // resets endboss' alert/attack animation loop
       }
       i++;
     }, 150);
   }
 
-  playEndbossAnmiations() {
+  playEndbossGotHit() {
     if (this.isDead()) {
       this.playEndbossDying();
       this.endGame();
-    } else if (this.isHurt()) this.playAnimation(this.IMAGES_HURT);
+    } else if (this.isHurt()) {
+      this.playAnimation(this.IMAGES_HURT);
+    }
   }
 
-  repeatAlertAttack(i) {
+  playEndbossAnimationLoop(i) {
     if (i < 25) {
-      this.moveLeft();
-      this.playAnimation(this.IMAGES_WALKING);
-      this.playEndbossAnmiations();
+      this.playEndBossWalk();
     }
     if (i > 25 && i < 45) {
-      this.playAnimation(this.IMAGES_ALERT);
-      this.playEndbossAnmiations();
+      this.playEndbossAlert();
     }
     if (i > 45 && i < 65) {
-      this.moveLeft();
-      this.playAnimation(this.IMAGES_ATTACK);
-      this.playEndbossAnmiations();
+      this.playEndbossAttack();
     }
   }
 
   playEndbossDying() {
     this.playAnimation(this.IMAGES_DEAD);
     this.moveDown(30);
+  }
+
+  playEndBossWalk() {
+    this.moveLeft();
+    this.playAnimation(this.IMAGES_WALKING);
+    this.playEndbossGotHit();
+  }
+
+  playEndbossAlert() {
+    this.playAnimation(this.IMAGES_ALERT);
+    this.playEndbossGotHit();
+  }
+
+  playEndbossAttack() {
+    this.moveLeft();
+    this.playAnimation(this.IMAGES_ATTACK);
+    this.playEndbossGotHit();
   }
 }

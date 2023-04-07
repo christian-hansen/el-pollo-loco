@@ -8,7 +8,6 @@ class Level {
     amountCollectableBottles;
     amountCollectableCoins;
 
-
     constructor(clouds, backgroundObjects, collectableItems, enemies, endboss,amountCollectableBottles,amountCollectableCoins){
         this.clouds = clouds;
         this.backgroundObjects = backgroundObjects;

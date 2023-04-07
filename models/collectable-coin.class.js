@@ -7,22 +7,18 @@ class Coin extends CollectableObject {
     bottom: 120,
     left: 120,
     right: 60,
-  }
+  };
   collect_sound = new Audio("audio/collect_coin.wav");
 
-IMAGES = [
-  'img/8_coin/coin_1.png',
-  'img/8_coin/coin_2.png',
-]
-    constructor(x) {
-        super().loadImages(this.IMAGES);
-        this.x = x + Math.random() * 400;
-        this.y = 300 - Math.random() * 200;
-        this.animate();
-      }
+  IMAGES = ["img/8_coin/coin_1.png", "img/8_coin/coin_2.png"];
+  constructor(x) {
+    super().loadImages(this.IMAGES);
+    this.x = x + Math.random() * 400;
+    this.y = 300 - Math.random() * 200;
+    this.animate();
+  }
 
-      animate(){
-        setInterval(() => (this.playAnimation(this.IMAGES)), 300)
-      }
-
-    }
+  animate() {
+    setInterval(() => this.playAnimation(this.IMAGES), 300);
+  }
+}

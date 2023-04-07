@@ -30,16 +30,16 @@ class World {
   }
 
   run() {
-    setStoppableInterval(() => {
+    setInterval(() => {
       this.checkEnemyCollision();
       this.checkEndbossCollision();
       this.checkEndbossBottleCollision();
       // this.checkEnemyJumpedOn();
     }, 100);
-    setStoppableInterval(() => {
+    setInterval(() => {
       this.checkCollection();
     }, 25);
-    setStoppableInterval(() => {
+    setInterval(() => {
       this.checkThrowObjects();
     }, 200);
   }
@@ -47,10 +47,7 @@ class World {
   // Enemy collion causes hit and reduces health bar
   checkEnemyCollision() {
     this.level.enemies.forEach((enemy) => {
-      if (
-        this.character.isJumping() &&
-        this.character.isColliding(enemy)
-      ) {
+      if (this.character.isJumping() && this.character.isColliding(enemy)) {
         enemy.isKilled();
         this.character.bounceUp();
       }

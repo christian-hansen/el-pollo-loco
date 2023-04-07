@@ -30,5 +30,4 @@ class CoinBar extends StatusBar {
       return 0;
     }
   }
-
 }

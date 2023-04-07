@@ -50,9 +50,17 @@ function generateBackground() {
   for (let i = 0; i < levelLength; i++) {
     for (let j = 0; j < backgroundImg.length; j++) {
       if (j < 4) {
-        backgroundObject = new BackgroundObject(backgroundImg[j],backgroundWidth * (i * 2 - 1),0);
+        backgroundObject = new BackgroundObject(
+          backgroundImg[j],
+          backgroundWidth * (i * 2 - 1),
+          0
+        );
       } else {
-        backgroundObject = new BackgroundObject(backgroundImg[j],backgroundWidth * (i * 2), 0);
+        backgroundObject = new BackgroundObject(
+          backgroundImg[j],
+          backgroundWidth * (i * 2),
+          0
+        );
       }
       backgroundObjects.push(backgroundObject);
     }
@@ -83,8 +91,6 @@ function generateEnemies() {
     enemies.push(chicken, smallchicken);
   }
 }
-
-
 
 function generateCollectableItems() {
   generateCollectableCoins();

@@ -69,7 +69,7 @@ class Pepe extends MovableObject {
     "img/2_character_pepe/1_idle/long_idle/I-19.png",
     "img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
-  world; // damit kann der Charakter auf die Variablen der World zugreifen
+  world;
   walking_sound = new Audio("audio/running_sand.wav");
 
   constructor() {
@@ -84,8 +84,8 @@ class Pepe extends MovableObject {
   }
 
   animate() {
-    setStoppableInterval(() => this.moveCharacter(), 1000 / 60);
-    setStoppableInterval(() => this.playCharacterAnimations(), 8000/60);
+    setInterval(() => this.moveCharacter(), 1000 / 60);
+    setInterval(() => this.playCharacterAnimations(), 8000/60);
   }
 
   moveCharacter() {

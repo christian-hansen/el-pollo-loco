@@ -1,13 +1,11 @@
 class ThrowableObject extends MovableObject {
-
-
   constructor() {
     super();
-    this.throw()
+    this.throw();
     this.animate();
   }
 
-  throw () {
+  throw() {
     this.applyGravity();
 
     setInterval(() => {

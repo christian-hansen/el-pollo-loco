@@ -10,9 +10,8 @@ class MovableObject extends DrawableObject {
   IMAGES_DEAD;
   isAlive = true;
 
-  //Gravitation
   applyGravity() {
-    setStoppableInterval(() => {
+    setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
@@ -29,19 +28,16 @@ class MovableObject extends DrawableObject {
   }
 
   isJumping() {
-      return this.y - this.ground < -30;
-    }
+    return this.y - this.ground < -30;
+  }
 
-
-
-  //TODO
   isColliding(obj) {
     return (
       (obj.isAlive || obj instanceof Coin || obj instanceof Bottle) &&
       this.x + this.width - this.offset.right >= obj.x + obj.offset.left &&
       this.y + this.height > obj.y + obj.offset.top &&
       this.x + this.offset.left - obj.width / 2 <
-      obj.x + obj.width - obj.offset.right &&
+        obj.x + obj.width - obj.offset.right &&
       this.y + this.offset.top < obj.y + obj.height
     );
   }
@@ -64,8 +60,8 @@ class MovableObject extends DrawableObject {
   }
 
   isHurt() {
-    let timepassed = new Date().getTime() - this.lastHit; //Difference in ms
-    timepassed = timepassed / 1000; // difference in seconds
+    let timepassed = new Date().getTime() - this.lastHit; // difference in ms
+    timepassed = timepassed / 1000;
     return timepassed < 1;
   }
 
@@ -148,5 +144,4 @@ class MovableObject extends DrawableObject {
       this.moveDown(50);
     }, 1800);
   }
-
 }

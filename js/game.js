@@ -12,7 +12,12 @@ let gameOverScreens = [
 
 function init() {
   document.getElementById("startscreen").classList.remove("d-none");
+//   detectMobileDevice();
+//   touchEventsStart();
+//   touchEventsEnd();
 }
+ 
+
 
 function startGame() {
   generateLevel();
@@ -22,12 +27,8 @@ function startGame() {
   world = new World(canvas, keyboard, level1);
 }
 
-function restartGame(){
-    document.getElementById("endscreen").classList.add("d-none");
-    canvas.classList.remove("d-none");
-   //TODO reset world
-    // world = new World(canvas, keyboard, level1);
-    
+function reloadGame(){
+window.location.reload(true);
 }
 
 function stopGame() {
@@ -106,5 +107,105 @@ function renderGameOverScreen() {
   let randomScreen = Math.floor(Math.random() * (max - min + 1)) + min;
 
   return `<img src="${gameOverScreens[randomScreen]}" width="853" height="480"></img>
-  <div class="button flex-center" onclick="restartGame()">Restart</div>`;
+  <div class="button flex-center" onclick="reloadGame()">Back to Start</div>`;
 }
+
+
+
+//TODO
+// function detectMobileDevice() {
+//     if (window.innerWidth < 750) {
+//       document.getElementById("mobileAlert").classList.remove("d-none");
+  
+//       checkMobileOrientation();
+//     }
+// }
+
+// function checkMobileOrientation() {
+//     if (window.matchMedia("(orientation: landscape)").matches) {
+//       document.getElementById("mobileAlert").classList.remove("d-none");
+//       document.getElementById("fullscreenalert").classList.add("d-none");
+//     } else {
+//       document.getElementById("mobileAlert").classList.add("d-none");
+  
+//       checkFullscreen();
+//     }
+//   }
+
+//   function checkFullscreen() {
+//     if (!document.fullscreenElement) {
+//       document.getElementById("fullscreenalert").classList.remove("d-none");
+//     }
+//   }
+
+//   window.addEventListener("orientationchange", checkMobileOrientation);
+
+
+//   function touchEventsStart() {
+//     document.getElementById("btn-left").addEventListener("touchstart", (ev) => {
+//       keyboard.KEY_LEFT = true;
+//       ev.preventDefault();
+//     });
+//     document.getElementById("btn-right").addEventListener("touchstart", (ev) => {
+//       keyboard.KEY_RIGHT = true;
+//       ev.preventDefault();
+//     });
+//     document.getElementById("btn-jump").addEventListener("touchstart", (ev) => {
+//       console.log("springen");
+//       keyboard.KEY_SPACE = true;
+//       ev.preventDefault();
+//     });
+//     document.getElementById("btn-throw").addEventListener("touchstart", (ev) => {
+//       keyboard.KEY_D = true;
+//       ev.preventDefault();
+//     });
+//   }
+  
+//   function touchEventsEnd() {
+//     document.getElementById("btn-left").addEventListener("touchend", (ev) => {
+//       keyboard.LEFT = false;
+//       ev.preventDefault();
+//     });
+//     document.getElementById("btn-right").addEventListener("touchend", (ev) => {
+//       keyboard.RIGHT = false;
+//       ev.preventDefault();
+//     });
+//     document.getElementById("btn-jump").addEventListener("touchend", (ev) => {
+//       keyboard.SPACE = false;
+//       ev.preventDefault();
+//     });
+//     document.getElementById("btn-throw").addEventListener("touchend", (ev) => {
+//       keyboard.D = false;
+//       ev.preventDefault();
+//     });
+//   }
+
+
+//   function toggleFullscreen() {
+//     let gamebox = document.getElementById("gamebox");
+//     let screenicon = document.getElementById("size");
+//     let startscreen = document.getElementById("startscreen");
+//     let endscreen = document.getElementById("endscreen");
+  
+//     if (!document.fullscreenElement) {
+//       enterFullscreen(gamebox, screenicon, endscreen, startscreen);
+//     } else {
+//       exitFullscreenMode(gamebox, screenicon, endscreen, startscreen);
+//     }
+//   }
+  
+//   function enterFullscreen(gamebox, screenicon, endscreen, startscreen) {
+//     gamebox.requestFullscreen();
+//     canvas.classList.add("fullscreen");
+//     startscreen.classList.add("fullscreen");
+//     endscreen.classList.add("fullscreen");
+//     screenicon.src = "img/minimize.png";
+//   }
+  
+//   function exitFullscreenMode(screenicon, endscreen, startscreen) {
+//     document.exitFullscreen();
+//     canvas.classList.remove("fullscreen");
+//     startscreen.classList.remove("fullscreen");
+//     endscreen.classList.remove("fullscreen");
+//     screenicon.src = "img/fullscreen.png";
+//   }

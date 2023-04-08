@@ -1,6 +1,6 @@
 class World {
   character = new Pepe();
-  level = level1;
+  level;
   ctx;
   canvas;
   keyboard;
@@ -16,10 +16,11 @@ class World {
   collectedCoins = 0;
   endboss;
 
-  constructor(canvas, keyboard) {
+  constructor(canvas, keyboard, level) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.level = level;
     this.draw();
     this.setWorld();
     this.run();

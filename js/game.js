@@ -19,11 +19,23 @@ function startGame() {
   document.getElementById("startscreen").classList.add("d-none");
   canvas = document.getElementById("canvas");
   canvas.classList.remove("d-none");
-  world = new World(canvas, keyboard);
+  world = new World(canvas, keyboard, level1);
+}
+
+function restartGame(){
+    document.getElementById("endscreen").classList.add("d-none");
+    canvas.classList.remove("d-none");
+   //TODO reset world
+    // world = new World(canvas, keyboard, level1);
+    
 }
 
 function stopGame() {
   clearAllIntervals();
+  setTimeout(() => {
+    document.getElementById("canvas").classList.add('d-none');
+    showEndScreen();
+  }, 1000);
 }
 
 function clearAllIntervals() {
@@ -93,5 +105,6 @@ function renderGameOverScreen() {
   let max = gameOverScreens.length - 1;
   let randomScreen = Math.floor(Math.random() * (max - min + 1)) + min;
 
-  return `<img src="${gameOverScreens[randomScreen]}" width="853" height="480"></img>`;
+  return `<img src="${gameOverScreens[randomScreen]}" width="853" height="480"></img>
+  <div class="button flex-center" onclick="restartGame()">Restart</div>`;
 }

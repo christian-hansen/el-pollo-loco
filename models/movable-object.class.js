@@ -108,9 +108,6 @@ class MovableObject extends DrawableObject {
   endGame() {
     setTimeout(() => {
       stopGame();
-      setTimeout(() => {
-        showEndScreen();
-      }, 1000);
     }, 2500);
   }
 

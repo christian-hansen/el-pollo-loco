@@ -22,6 +22,13 @@ function init() {
 function startGame() {
   generateLevel();
   document.getElementById("startscreen").classList.add("d-none");
+  document.getElementById("btn-fullscreen").classList.remove("d-none");
+  document.getElementById("btn-soundon").classList.remove("d-none");
+  document.getElementById("btn-soundoff").classList.remove("d-none");
+  document.getElementById("btn-left").classList.remove("d-none");
+  document.getElementById("btn-right").classList.remove("d-none");
+  document.getElementById("btn-jump").classList.remove("d-none");
+  document.getElementById("btn-throw").classList.remove("d-none");
   canvas = document.getElementById("canvas");
   canvas.classList.remove("d-none");
   world = new World(canvas, keyboard, level1);
@@ -48,6 +55,13 @@ function showEndScreen() {
   endscreen.innerHTML = renderGameOverScreen();
 
   document.getElementById("canvas").classList.add("d-none");
+  document.getElementById("btn-fullscreen").classList.add("d-none");
+  document.getElementById("btn-soundon").classList.add("d-none");
+  document.getElementById("btn-soundoff").classList.add("d-none");
+  document.getElementById("btn-left").classList.add("d-none");
+  document.getElementById("btn-right").classList.add("d-none");
+  document.getElementById("btn-jump").classList.add("d-none");
+  document.getElementById("btn-throw").classList.add("d-none");
   endscreen.classList.remove("d-none");
 }
 
@@ -151,7 +165,6 @@ function renderGameOverScreen() {
       e.preventDefault();
     });
     document.getElementById("btn-jump").addEventListener("touchstart", (e) => {
-      console.log("springen");
       keyboard.KEY_SPACE = true;
       e.preventDefault();
     });
@@ -162,7 +175,7 @@ function renderGameOverScreen() {
   }
   
   function touchEventsEnd() {
-    document.getElementById("btn-left").addEventListener("touchend", (e) => {
+    document.getElementById("btn-left").addEventListener("touchend", (ev) => {
       keyboard.LEFT = false;
       e.preventDefault();
     });

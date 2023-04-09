@@ -23,6 +23,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 h1 {
@@ -37,7 +38,7 @@ h1 {
 }
 
 .button {
-    z-index: 2;
+    z-index: 3;
     position: absolute;
     top: 0;
     left: 0;
@@ -70,6 +71,44 @@ cursor: pointer;
 canvas {
     background-color: black;
     display: block;
+    z-index: 1;
+}
+
+.controls-container-top {
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+    position: relative;
+    margin-top: -460px;
+}
+
+.controls-container-bottom {
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+    position: relative;
+    margin-top: 350px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.btns {
+    display: flex;
+    gap: 5px;
+}
+
+.control-btn img {
+    height: 70px;
+    width: 70px;
+    background-color: rgba(255, 221, 0, 0.25);
+    border-radius: 100px;
+}
+
+.settings-btn img {
+    height: 30px;
+    width: 30px;
+    /* background-color: rgba(255, 221, 0, 0.25); */
+    /* border-radius: 100px; */
 }
 
 /* Smartphones */

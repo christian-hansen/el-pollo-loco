@@ -9,12 +9,10 @@ let gameOverScreens = [
   "img/9_intro_outro_screens/game_over/oh no you lost!.png",
   "img/9_intro_outro_screens/game_over/you lost.png",
 ];
+let soundActive = false;
 
 function init() {
   document.getElementById("startscreen").classList.remove("d-none");
-//   detectMobileDevice();
-  touchEventsStart();
-  touchEventsEnd();
 }
  
 
@@ -23,8 +21,7 @@ function startGame() {
   generateLevel();
   document.getElementById("startscreen").classList.add("d-none");
   document.getElementById("btn-fullscreen").classList.remove("d-none");
-  document.getElementById("btn-soundon").classList.remove("d-none");
-  document.getElementById("btn-soundoff").classList.remove("d-none");
+  document.getElementById("btn-sound").classList.remove("d-none");
   document.getElementById("btn-left").classList.remove("d-none");
   document.getElementById("btn-right").classList.remove("d-none");
   document.getElementById("btn-jump").classList.remove("d-none");
@@ -32,6 +29,9 @@ function startGame() {
   canvas = document.getElementById("canvas");
   canvas.classList.remove("d-none");
   world = new World(canvas, keyboard, level1);
+  toggleSound();
+  touchStart();
+  touchEnd();
 }
 
 function reloadGame(){
@@ -42,6 +42,7 @@ function stopGame() {
   clearAllIntervals();
   setTimeout(() => {
     document.getElementById("canvas").classList.add('d-none');
+    world.backgroundMusic.pause();
     showEndScreen();
   }, 1000);
 }
@@ -53,11 +54,9 @@ function clearAllIntervals() {
 function showEndScreen() {
   let endscreen = document.getElementById("endscreen");
   endscreen.innerHTML = renderGameOverScreen();
-
   document.getElementById("canvas").classList.add("d-none");
   document.getElementById("btn-fullscreen").classList.add("d-none");
-  document.getElementById("btn-soundon").classList.add("d-none");
-  document.getElementById("btn-soundoff").classList.add("d-none");
+  document.getElementById("btn-sound").classList.add("d-none");
   document.getElementById("btn-left").classList.add("d-none");
   document.getElementById("btn-right").classList.add("d-none");
   document.getElementById("btn-jump").classList.add("d-none");
@@ -155,7 +154,7 @@ function renderGameOverScreen() {
 //   window.addEventListener("orientationchange", checkMobileOrientation);
 
 
-  function touchEventsStart() {
+  function touchStart() {
     document.getElementById("btn-left").addEventListener("touchstart", (e) => {
       keyboard.KEY_LEFT = true;
       e.preventDefault();
@@ -174,8 +173,8 @@ function renderGameOverScreen() {
     });
   }
   
-  function touchEventsEnd() {
-    document.getElementById("btn-left").addEventListener("touchend", (ev) => {
+  function touchEnd() {
+    document.getElementById("btn-left").addEventListener("touchend", (e) => {
       keyboard.LEFT = false;
       e.preventDefault();
     });
@@ -222,3 +221,17 @@ function renderGameOverScreen() {
 //     endscreen.classList.remove("fullscreen");
 //     screenicon.src = "img/fullscreen.png";
 //   }
+
+
+function toggleSound() {
+    let soundicon = document.getElementById('soundicon');
+    if (soundActive) {
+        soundActive = false;
+        world.backgroundMusic.volume = 0.0;
+        soundicon.src = './img/1_controls/muted.png';
+    }  else {
+        soundActive = true;
+        world.backgroundMusic.volume = 0.3;
+        soundicon.src = './img/1_controls/loud.png';
+    }
+}

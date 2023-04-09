@@ -71,6 +71,9 @@ class Pepe extends MovableObject {
   ];
   world;
   walking_sound = new Audio("audio/running_sand.wav");
+  hurt_sound = new Audio("audio/hurt.wav");
+  dead_sound = new Audio("audio/ohno.wav");
+  jump_sound = new Audio("audio/jump.wav");
 
   constructor() {
     super().loadImages(this.IMAGES_IDLE);
@@ -85,25 +88,36 @@ class Pepe extends MovableObject {
 
   animate() {
     setInterval(() => this.moveCharacter(), 1000 / 60);
-    setInterval(() => this.playCharacterAnimations(), 8000/60);
+    setInterval(() => this.playCharacterAnimations(), 8000 / 60);
   }
 
   moveCharacter() {
-    this.walking_sound.playbackRate = 2;
-    this.walking_sound.pause();
+    if (soundActive) {
+      this.walking_sound.playbackRate = 2;
+      this.walking_sound.pause();
+    }
     if (this.canMoveRight()) this.moveRight();
     if (this.canMoveLeft()) this.moveLeft();
-    if (this.canJump()) this.jump();
+    if (this.canJump()) {
+      world.playSound(this.jump_sound);
+      this.jump();
+    }
     this.world.camera_x = -this.x + 75;
   }
 
   playCharacterAnimations() {
     if (this.isDead()) {
       this.playDyingAnimation();
+      this.hurt_sound.pause();
+      this.dead_sound.playbackRate = 0.2;
+      world.playSound(this.dead_sound);
       this.endGame();
     } else if (this.isHurt()) {
+      this.hurt_sound.playbackRate = 2;
+      this.hurt_sound.pause();
       this.playAnimation(this.IMAGES_HURT);
     } else if (this.isAboveGround()) {
+
       this.playAnimation(this.IMAGES_JUMPING);
     } else if (this.isMoving()) {
       this.playAnimation(this.IMAGES_WALKING);
@@ -115,12 +129,14 @@ class Pepe extends MovableObject {
 
   // Start movement functions
   canMoveRight() {
-    return this.world.keyboard.KEY_RIGHT && this.x < this.world.level.end_of_level_x;
+    return (
+      this.world.keyboard.KEY_RIGHT && this.x < this.world.level.end_of_level_x
+    );
   }
 
   moveRight() {
     super.moveRight();
-    if (!this.isAboveGround()) this.walking_sound.play();
+    if (!this.isAboveGround()) world.playSound(this.walking_sound);
     this.flippedGraphics = false;
   }
 
@@ -130,7 +146,7 @@ class Pepe extends MovableObject {
 
   moveLeft() {
     super.moveLeft();
-    if (!this.isAboveGround()) this.walking_sound.play();
+    if (!this.isAboveGround()) world.playSound(this.walking_sound);
     this.flippedGraphics = true;
   }
 
@@ -150,5 +166,9 @@ class Pepe extends MovableObject {
         this.moveDown(150);
       }, 1000);
     }, 1000);
+  }
+
+  playDeadSound() {
+    //
   }
 }

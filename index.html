@@ -39,14 +39,14 @@
     <script src="./models/keyboard.class.js"></script>
     <script src="./js/game.js"></script>
    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="152x152" href="/img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#ffc300">
-    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="152x152" href="./img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="./img/favicon/safari-pinned-tab.svg" color="#ffc300">
+    <link rel="shortcut icon" href="./img/favicon/favicon.ico">
     <meta name="msapplication-TileColor" content="#ffc300">
-    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="msapplication-config" content="./img/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffc300">
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
@@ -60,7 +60,7 @@
     <div id="fullscreen">
         <!-- Startscreen starts here -->
         <div id="startscreen" class="flex-center d-none">
-            <img src="/img/9_intro_outro_screens/start/startscreen_1.png" width="853" height="480">
+            <img src="./img/9_intro_outro_screens/start/startscreen_1.png" width="853" height="480">
             <div class="button flex-center" onclick="startGame()">Start Game</div>
         </div>
         <!-- Endscreen starts here -->
@@ -75,8 +75,7 @@
         <div class="controls-container-top d-none">
             <div class="btns">
                 <div id="btn-fullscreen" class="settings-btn d-none"><img src="./img/1_controls/fullscreen.png"></div>
-                <div id="btn-soundon" class="settings-btn d-none"><img src="./img/1_controls/loud.png"></div>
-                <div id="btn-soundoff" class="settings-btn d-none"><img src="./img/1_controls/muted.png"></div>
+                <div id="btn-sound" class="settings-btn d-none" onclick="toggleSound()"><img id="soundicon"></div>
             </div>
         </div>
         <div class="controls-container-bottom">

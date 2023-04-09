@@ -15,6 +15,9 @@ class World {
   collectedBottles = 0;
   collectedCoins = 0;
   endboss;
+  backgroundMusic =  new Audio('audio/background.mp3');
+  chickenHurt_sound = new Audio('audio/chickenouch.wav')
+
 
   constructor(canvas, keyboard, level) {
     this.ctx = canvas.getContext("2d");
@@ -31,11 +34,11 @@ class World {
   }
 
   run() {
+this.playBackgroundMusic()
     setInterval(() => {
       this.checkEnemyCollision();
       this.checkEndbossCollision();
       this.checkEndbossBottleCollision();
-      // this.checkEnemyJumpedOn();
     }, 100);
     setInterval(() => {
       this.checkCollection();
@@ -50,10 +53,12 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isJumping() && this.character.isColliding(enemy)) {
         enemy.isKilled();
+        world.playSound(this.chickenHurt_sound);
         this.character.bounceUp();
       }
       if (this.character.isColliding(enemy)) {
         this.character.hit(5);
+        world.playSound(this.character.hurt_sound);
         this.statusBar[0].setPercentage(this.character.energy);
       }
     });
@@ -63,6 +68,7 @@ class World {
     this.level.endboss.forEach((endboss) => {
       if (this.character.isColliding(endboss)) {
         this.character.hit(20);
+        world.playSound(this.character.hurt_sound);
         this.statusBar[0].setPercentage(this.character.energy);
       }
     });
@@ -71,6 +77,7 @@ class World {
   checkEndbossBottleCollision() {
     this.throwableObjects.forEach((bottle) => {
       if (this.level.endboss[0].isColliding(bottle)) {
+        world.playSound(this.chickenHurt_sound);
         this.level.endboss[0].hit(10);
         this.statusBar[3].setPercentage(this.level.endboss[0].energy);
       }
@@ -179,4 +186,16 @@ class World {
     object.x = object.x * -1; // x-Achse drehen
     this.ctx.restore();
   }
+
+  playSound(sound) {
+    if (soundActive) {
+      sound.play();
+    }
+  }
+
+  playBackgroundMusic() {
+      this.backgroundMusic.playbackRate = 1.2;
+      this.backgroundMusic.volume = 0.3;
+      this.backgroundMusic.play();
+    }
 }

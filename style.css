@@ -123,6 +123,7 @@ canvas {
 @media only screen and (max-height: 480px) {
     canvas {
         height: 100vh;
+        width: 720px;
     }
 }
 

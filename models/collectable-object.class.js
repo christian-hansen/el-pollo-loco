@@ -22,7 +22,7 @@ playAnimation(images) {
 collectItem() {
     this.isCollected = true;
     this.collect_sound.playbackRate = 2;
-    this.collect_sound.play();
+    world.playSound(this.collect_sound);
     this.removeItem();
   }
 

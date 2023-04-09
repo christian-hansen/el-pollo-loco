@@ -64,11 +64,13 @@ class Endboss extends MovableObject {
   animate() {
     let i;
     let hadFirstContact = false;
+    let endbossHealthbar = new EndBossBar();
 
     setInterval(() => {
       if (world.character.x > this.x - 500 && !hadFirstContact) {
         i = 0;
         hadFirstContact = true;
+        world.statusBar.push(endbossHealthbar)
       }
       this.playEndbossAnimationLoop(i);
       if (i === 65) {
@@ -82,6 +84,7 @@ class Endboss extends MovableObject {
     if (this.isDead()) {
       world.playSound(this.endbossDead_sound);
       this.playEndbossDying();
+      world.gameWon = true;
       this.endGame();
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);

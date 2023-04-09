@@ -54,13 +54,13 @@
 
 <body onload="init()">
     <h1 class="hidemobile">El Pollo Loco</h1>
-    <div id="mobileAlert" class="d-none">Please rotate your phone.</div>
+    <div id="rotationAlert" class="flex-center d-none"><div class="flex-center">Please rotate your phone.</div></div>
     <div id="fullscreenalert" class="d-none">Please enter fullscreen</div>
 
-    <div id="fullscreen">
+    <div id="fullscreen flex-center">
         <!-- Startscreen starts here -->
         <div id="startscreen" class="flex-center d-none">
-            <img src="./img/9_intro_outro_screens/start/startscreen_1.png" width="853" height="480">
+            <img src="./img/9_intro_outro_screens/start/startscreen_1.png">
             <div class="button flex-center" onclick="startGame()">Start Game</div>
         </div>
         <!-- Endscreen starts here -->
@@ -80,13 +80,13 @@
         </div>
         <div class="controls-container-bottom">
             <div class="btns">
-                <div id="btn-left" class="control-btn d-none"><img src="./img/1_controls/left.png"></div>
-                <div id="btn-right" class="control-btn d-none"><img src="./img/1_controls/right.png"></div>
+                <div id="btn-left" class="control-btn hide d-none"><img src="./img/1_controls/left.png"></div>
+                <div id="btn-right" class="control-btn hide d-none"><img src="./img/1_controls/right.png"></div>
             </div>
 
             <div class="btns">
-                <div id="btn-jump" class="control-btn d-none"><img src="./img/1_controls/jump.png"></div>
-                <div id="btn-throw" class="control-btn d-none"><img src="./img/1_controls/throwbottle.png"></div>
+                <div id="btn-jump" class="control-btn hide d-none"><img src="./img/1_controls/jump.png"></div>
+                <div id="btn-throw" class="control-btn hide d-none"><img src="./img/1_controls/throwbottle.png"></div>
             </div>
         </div>
 

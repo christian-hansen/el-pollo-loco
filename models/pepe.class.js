@@ -54,7 +54,6 @@ class Pepe extends MovableObject {
     "img/2_character_pepe/5_dead/D-54.png",
     "img/2_character_pepe/5_dead/D-55.png",
     "img/2_character_pepe/5_dead/D-56.png",
-    // "img/2_character_pepe/5_dead/D-57.png",
   ];
 
   IMAGES_LONGIDLE = [
@@ -84,6 +83,11 @@ class Pepe extends MovableObject {
     this.loadImages(this.IMAGES_LONGIDLE);
     this.applyGravity();
     this.animate();
+    this.walking_sound.playbackRate = 2;
+    this.hurt_sound.playbackRate = 2;
+    this.dead_sound.playbackRate = 0.2;
+    this.hurt_sound.volume = 0.3;
+    this.dead_sound.volume = 0.3;
   }
 
   animate() {
@@ -92,10 +96,7 @@ class Pepe extends MovableObject {
   }
 
   moveCharacter() {
-    if (soundActive) {
-      this.walking_sound.playbackRate = 2;
-      this.walking_sound.pause();
-    }
+    this.walking_sound.pause();
     if (this.canMoveRight()) this.moveRight();
     if (this.canMoveLeft()) this.moveLeft();
     if (this.canJump()) {
@@ -109,11 +110,9 @@ class Pepe extends MovableObject {
     if (this.isDead()) {
       this.playDyingAnimation();
       this.hurt_sound.pause();
-      this.dead_sound.playbackRate = 0.2;
       world.playSound(this.dead_sound);
       this.endGame();
     } else if (this.isHurt()) {
-      this.hurt_sound.playbackRate = 2;
       this.hurt_sound.pause();
       this.playAnimation(this.IMAGES_HURT);
     } else if (this.isAboveGround()) {
@@ -166,9 +165,5 @@ class Pepe extends MovableObject {
         this.moveDown(150);
       }, 1000);
     }, 1000);
-  }
-
-  playDeadSound() {
-    //
   }
 }

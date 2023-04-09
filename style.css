@@ -20,9 +20,6 @@ body {
 }
 
 .fullscreen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
 }
 
@@ -34,7 +31,12 @@ h1 {
 }
 
 #startscreen, #endscreen {
-    position: relative;
+    position: relative
+}
+
+#startscreen img, #endscreen img {
+    width: 853px;
+    height: 480px;
 }
 
 .button {
@@ -72,6 +74,8 @@ canvas {
     background-color: black;
     display: block;
     z-index: 1;
+    width: 720px;
+    height: 480px;
 }
 
 .controls-container-top {
@@ -111,25 +115,50 @@ canvas {
     /* border-radius: 100px; */
 }
 
+#rotationAlert {
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    font-size: 60px;
+}
+
 /* Smartphones */
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 845px) {
     canvas {
         width: 100%;
     }
-
 }
 
-/* Smartphones */
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-        width: 720px;
+@media only screen and (min-width: 845px) and (max-height: 480px) {
+    .hide {
+        display: none;
     }
 }
 
-@media only screen and (max-height: 650px) {
+/* Smartphones */
+@media only screen and (max-width: 845px) and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
 
+    #startscreen img, #endscreen img {
+        height: 230px;
+        width: 350px;
+    }
 
+    body {
+        display: block;
+
+    }
+
+}
+
+@media only screen and (max-width: 845px) {
     .hidemobile {
         display: none;
     }

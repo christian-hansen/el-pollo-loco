@@ -9,14 +9,14 @@ class World {
     new HealthBar(),
     new CoinBar(),
     new BottleBar(),
-    new EndBossBar(),
   ];
   throwableObjects = [];
   collectedBottles = 0;
   collectedCoins = 0;
   endboss;
   backgroundMusic =  new Audio('audio/background.mp3');
-  chickenHurt_sound = new Audio('audio/chickenouch.wav')
+  chickenHurt_sound = new Audio('audio/chickenouch.wav');
+  gameWon = false;
 
 
   constructor(canvas, keyboard, level) {
@@ -27,6 +27,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.chickenHurt_sound.volume = 0.2;
   }
 
   setWorld() {
@@ -45,7 +46,7 @@ this.playBackgroundMusic()
     }, 25);
     setInterval(() => {
       this.checkThrowObjects();
-    }, 200);
+    }, 150);
   }
 
   // Enemy collion causes hit and reduces health bar
@@ -195,7 +196,7 @@ this.playBackgroundMusic()
 
   playBackgroundMusic() {
       this.backgroundMusic.playbackRate = 1.2;
-      this.backgroundMusic.volume = 0.3;
+      this.backgroundMusic.volume = 0.2;
       this.backgroundMusic.play();
     }
 }

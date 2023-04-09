@@ -16,7 +16,7 @@ body {
     background-size: cover;
     background-position: center;
     font-family: "zabars", Arial, Helvetica, sans-serif;
-    color: rgb(252, 133, 54);
+    color: rgb(250, 100, 0);
 }
 
 .fullscreen {
@@ -27,8 +27,8 @@ body {
 
 h1 {
     font-size: 96px;
-    letter-spacing: 6px;
-    text-shadow: 6px 6px rgba(0, 0, 0, 0.5);
+    letter-spacing: 8px;
+    text-shadow: 8px 8px rgba(0, 0, 0, 0.6);
     margin: 5px;
 }
 
@@ -45,8 +45,8 @@ h1 {
     bottom: 0;
     background-color: rgba(255, 221, 0);
     color: rgb(250, 100, 0);
-    letter-spacing: 1px;
-    text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.6);
     font-size: 48px;
     border-radius: 5px;
     border: 1px solid black;

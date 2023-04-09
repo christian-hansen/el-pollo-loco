@@ -13,8 +13,8 @@ let gameOverScreens = [
 function init() {
   document.getElementById("startscreen").classList.remove("d-none");
 //   detectMobileDevice();
-//   touchEventsStart();
-//   touchEventsEnd();
+  touchEventsStart();
+  touchEventsEnd();
 }
  
 
@@ -141,44 +141,44 @@ function renderGameOverScreen() {
 //   window.addEventListener("orientationchange", checkMobileOrientation);
 
 
-//   function touchEventsStart() {
-//     document.getElementById("btn-left").addEventListener("touchstart", (ev) => {
-//       keyboard.KEY_LEFT = true;
-//       ev.preventDefault();
-//     });
-//     document.getElementById("btn-right").addEventListener("touchstart", (ev) => {
-//       keyboard.KEY_RIGHT = true;
-//       ev.preventDefault();
-//     });
-//     document.getElementById("btn-jump").addEventListener("touchstart", (ev) => {
-//       console.log("springen");
-//       keyboard.KEY_SPACE = true;
-//       ev.preventDefault();
-//     });
-//     document.getElementById("btn-throw").addEventListener("touchstart", (ev) => {
-//       keyboard.KEY_D = true;
-//       ev.preventDefault();
-//     });
-//   }
+  function touchEventsStart() {
+    document.getElementById("btn-left").addEventListener("touchstart", (e) => {
+      keyboard.KEY_LEFT = true;
+      e.preventDefault();
+    });
+    document.getElementById("btn-right").addEventListener("touchstart", (e) => {
+      keyboard.KEY_RIGHT = true;
+      e.preventDefault();
+    });
+    document.getElementById("btn-jump").addEventListener("touchstart", (e) => {
+      console.log("springen");
+      keyboard.KEY_SPACE = true;
+      e.preventDefault();
+    });
+    document.getElementById("btn-throw").addEventListener("touchstart", (e) => {
+      keyboard.KEY_D = true;
+      e.preventDefault();
+    });
+  }
   
-//   function touchEventsEnd() {
-//     document.getElementById("btn-left").addEventListener("touchend", (ev) => {
-//       keyboard.LEFT = false;
-//       ev.preventDefault();
-//     });
-//     document.getElementById("btn-right").addEventListener("touchend", (ev) => {
-//       keyboard.RIGHT = false;
-//       ev.preventDefault();
-//     });
-//     document.getElementById("btn-jump").addEventListener("touchend", (ev) => {
-//       keyboard.SPACE = false;
-//       ev.preventDefault();
-//     });
-//     document.getElementById("btn-throw").addEventListener("touchend", (ev) => {
-//       keyboard.D = false;
-//       ev.preventDefault();
-//     });
-//   }
+  function touchEventsEnd() {
+    document.getElementById("btn-left").addEventListener("touchend", (e) => {
+      keyboard.LEFT = false;
+      e.preventDefault();
+    });
+    document.getElementById("btn-right").addEventListener("touchend", (e) => {
+      keyboard.RIGHT = false;
+      e.preventDefault();
+    });
+    document.getElementById("btn-jump").addEventListener("touchend", (e) => {
+      keyboard.SPACE = false;
+      e.preventDefault();
+    });
+    document.getElementById("btn-throw").addEventListener("touchend", (e) => {
+      keyboard.D = false;
+      e.preventDefault();
+    });
+  }
 
 
 //   function toggleFullscreen() {

@@ -143,7 +143,7 @@ function renderGameWonScreen() {
 
 //TODO
 function detectMobileDevice() {
-    if (window.innerWidth < 500 && window.innerHeight < 1000) {
+    if (window.innerWidth < 500 && window.innerHeight < 900) {
       document.getElementById("rotationAlert").classList.remove("d-none");
   
       checkMobileOrientation();

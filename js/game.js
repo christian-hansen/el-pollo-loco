@@ -10,6 +10,7 @@ let gameOverScreens = [
   "img/9_intro_outro_screens/game_over/you lost.png",
 ];
 let soundActive = false;
+let isFullScreen = false;
 
 function init() {
   document.getElementById("startscreen").classList.remove("d-none");
@@ -63,21 +64,11 @@ window.addEventListener("keydown", (event) => {
   if (event.keyCode == 37) {
     keyboard.KEY_LEFT = true;
   }
-  if (event.keyCode == 38) {
-    keyboard.KEY_UP = true;
-  }
-  if (event.keyCode == 40) {
-    keyboard.KEY_DOWN = true;
-  }
   if (event.keyCode == 32) {
     keyboard.KEY_SPACE = true;
   }
   if (event.keyCode == 68) {
     keyboard.KEY_D = true;
-    console.log("D");
-  }
-  if (event.keyCode == 80) {
-    keyboard.KEY_P = true;
   }
 });
 
@@ -88,20 +79,11 @@ window.addEventListener("keyup", (event) => {
   if (event.keyCode == 37) {
     keyboard.KEY_LEFT = false;
   }
-  if (event.keyCode == 38) {
-    keyboard.KEY_UP = false;
-  }
-  if (event.keyCode == 40) {
-    keyboard.KEY_DOWN = false;
-  }
   if (event.keyCode == 32) {
     keyboard.KEY_SPACE = false;
   }
   if (event.keyCode == 68) {
     keyboard.KEY_D = false;
-  }
-  if (event.keyCode == 80) {
-    keyboard.KEY_P = false;
   }
 });
 
@@ -177,6 +159,7 @@ function checkMobileOrientation() {
     });
     document.getElementById("btn-right").addEventListener("touchstart", (e) => {
       keyboard.KEY_RIGHT = true;
+      console.log("Läuft rechts");
       e.preventDefault();
     });
     document.getElementById("btn-jump").addEventListener("touchstart", (e) => {
@@ -196,6 +179,8 @@ function checkMobileOrientation() {
     });
     document.getElementById("btn-right").addEventListener("touchend", (e) => {
       keyboard.RIGHT = false;
+      console.log(keyboard.RIGHT);
+      console.log("Läuft nicht mehr rechts");
       e.preventDefault();
     });
     document.getElementById("btn-jump").addEventListener("touchend", (e) => {
@@ -209,34 +194,34 @@ function checkMobileOrientation() {
   }
 
 
-//   function toggleFullscreen() {
-//     let gamebox = document.getElementById("gamebox");
-//     let screenicon = document.getElementById("size");
-//     let startscreen = document.getElementById("startscreen");
-//     let endscreen = document.getElementById("endscreen");
+  function toggleFullscreen() {
+    let fullscreen = document.getElementById("fullscreen");
+    if (!isFullScreen) {
+      enterFullscreen(fullscreen);
+      isFullScreen = true}
+      else {
+        exitFullscreen();
+        isFullScreen = false;
+      }
+  }
   
-//     if (!document.fullscreenElement) {
-//       enterFullscreen(gamebox, screenicon, endscreen, startscreen);
-//     } else {
-//       exitFullscreenMode(gamebox, screenicon, endscreen, startscreen);
-//     }
-//   }
-  
-//   function enterFullscreen(gamebox, screenicon, endscreen, startscreen) {
-//     gamebox.requestFullscreen();
-//     canvas.classList.add("fullscreen");
-//     startscreen.classList.add("fullscreen");
-//     endscreen.classList.add("fullscreen");
-//     screenicon.src = "img/minimize.png";
-//   }
-  
-//   function exitFullscreenMode(screenicon, endscreen, startscreen) {
-//     document.exitFullscreen();
-//     canvas.classList.remove("fullscreen");
-//     startscreen.classList.remove("fullscreen");
-//     endscreen.classList.remove("fullscreen");
-//     screenicon.src = "img/fullscreen.png";
-//   }
+function enterFullscreen(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+    element.msRequestFullscreen();
+  } else if(element.webkitRequestFullscreen) {  // iOS Safari
+    element.webkitRequestFullscreen();
+  }
+}
+
+function exitFullscreen() {
+  if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+}
 
 
 function toggleSound() {

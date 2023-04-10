@@ -28,6 +28,7 @@ h1 {
     letter-spacing: 8px;
     text-shadow: 8px 8px rgba(0, 0, 0, 0.6);
     margin: 5px;
+    text-align: center;
 }
 
 #startscreen, #endscreen {
@@ -53,10 +54,10 @@ h1 {
     font-size: 48px;
     border-radius: 5px;
     border: 1px solid black;
-    width: 250px;
-    height: 50px;
+    width: 220px;
+    height: 40px;
     padding: 8px;
-    margin: 25px auto auto auto;
+    margin: 15px auto auto auto;
 cursor: pointer;
 }
 
@@ -78,15 +79,15 @@ canvas {
     height: 480px;
 }
 
-.controls-container-top {
+/* .controls-container-top {
     display: flex;
     justify-content: center;
     z-index: 2;
     position: absolute;
     top: 0;
     right: 23%;
-    /* margin-top: -370px; */
-}
+    margin-top: -370px;
+} */
 
 .controls-container-bottom {
     display: flex;
@@ -106,7 +107,8 @@ canvas {
 
 .btns-top {
     position: absolute;
-    top: 0;
+    bottom: 405px;
+    right: 0;
 }
 
 .btns-left {
@@ -173,6 +175,11 @@ canvas {
     border: 1px solid black;
 }
 
+.full {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
 /* Schmal egal wie hoch */
 @media only screen and (max-width: 914px) {
     canvas {
@@ -216,5 +223,59 @@ canvas {
 @media only screen and (max-width: 916px) {
     .hidemobile {
         display: none;
+    }
+}
+
+@media only screen and (max-height: 470px) {
+    .btns-top {
+        bottom: 390px;
+    }
+}
+
+@media only screen and (max-height: 450px) {
+    .btns-top {
+        bottom: 370px;
+    }
+}
+
+@media only screen and (max-height: 430px) {
+    .btns-top {
+        bottom: 350px;
+    }
+}
+
+@media only screen and (max-height: 410px) {
+    .btns-top {
+        bottom: 330px;
+    }
+}
+
+@media only screen and (max-height: 390px) {
+    .btns-top {
+        bottom: 310px;
+    }
+}
+
+@media only screen and (max-height: 370px) {
+    .btns-top {
+        bottom: 290px;
+    }
+}
+
+@media only screen and (max-height: 350px) {
+    .btns-top {
+        bottom: 270px;
+    }
+}
+
+@media only screen and (max-height: 330px) {
+    .btns-top {
+        bottom: 250px;
+    }
+}
+
+@media only screen and (max-height: 310px) {
+    .btns-top {
+        bottom: 230px;
     }
 }

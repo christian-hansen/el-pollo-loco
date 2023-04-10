@@ -189,7 +189,7 @@ this.playBackgroundMusic()
   }
 
   playSound(sound) {
-    if (soundActive) {
+    if (isSoundActive) {
       sound.play();
     }
   }

@@ -9,7 +9,7 @@ let gameOverScreens = [
   "img/9_intro_outro_screens/game_over/oh no you lost!.png",
   "img/9_intro_outro_screens/game_over/you lost.png",
 ];
-let soundActive = false;
+let isSoundActive = false;
 let isFullScreen = false;
 
 function init() {
@@ -18,8 +18,6 @@ function init() {
   touchStart();
   touchEnd();
 }
- 
-
 
 function startGame() {
   generateLevel();
@@ -30,14 +28,14 @@ function startGame() {
   toggleSound();
 }
 
-function reloadGame(){
-window.location.reload(true);
+function reloadGame() {
+  window.location.reload(true);
 }
 
 function stopGame() {
   clearAllIntervals();
   setTimeout(() => {
-    document.getElementById("canvas").classList.add('d-none');
+    document.getElementById("canvas").classList.add("d-none");
     world.backgroundMusic.pause();
     showEndScreen();
   }, 1000);
@@ -51,8 +49,7 @@ function showEndScreen() {
   let endscreen = document.getElementById("endscreen");
   if (world.gameWon) {
     endscreen.innerHTML = renderGameWonScreen();
-  } else
-  endscreen.innerHTML = renderGameOverScreen();
+  } else endscreen.innerHTML = renderGameOverScreen();
   hideGameUI();
   endscreen.classList.remove("d-none");
 }
@@ -88,23 +85,22 @@ window.addEventListener("keyup", (event) => {
 });
 
 function showGameUI() {
-    document.getElementById("startscreen").classList.add("d-none");
-    document.getElementById("btn-fullscreen").classList.remove("d-none");
-    document.getElementById("btn-sound").classList.remove("d-none");
-    document.getElementById("btn-left").classList.remove("d-none");
-    document.getElementById("btn-right").classList.remove("d-none");
-    document.getElementById("btn-jump").classList.remove("d-none");
-    document.getElementById("btn-throw").classList.remove("d-none");
-
+  document.getElementById("startscreen").classList.add("d-none");
+  document.getElementById("btn-fullscreen").classList.remove("d-none");
+  document.getElementById("btn-sound").classList.remove("d-none");
+  document.getElementById("btn-left").classList.remove("d-none");
+  document.getElementById("btn-right").classList.remove("d-none");
+  document.getElementById("btn-jump").classList.remove("d-none");
+  document.getElementById("btn-throw").classList.remove("d-none");
 }
 
 function hideGameUI() {
-    document.getElementById("btn-fullscreen").classList.add("d-none");
-    document.getElementById("btn-sound").classList.add("d-none");
-    document.getElementById("btn-left").classList.add("d-none");
-    document.getElementById("btn-right").classList.add("d-none");
-    document.getElementById("btn-jump").classList.add("d-none");
-    document.getElementById("btn-throw").classList.add("d-none");
+  document.getElementById("btn-fullscreen").classList.add("d-none");
+  document.getElementById("btn-sound").classList.add("d-none");
+  document.getElementById("btn-left").classList.add("d-none");
+  document.getElementById("btn-right").classList.add("d-none");
+  document.getElementById("btn-jump").classList.add("d-none");
+  document.getElementById("btn-throw").classList.add("d-none");
 }
 
 // Templates
@@ -118,125 +114,136 @@ function renderGameOverScreen() {
 }
 
 function renderGameWonScreen() {
-    return `<img src="img/9_intro_outro_screens/game_over/gamewon2.png" width="853" height="480"></img>
+  return `<img src="img/9_intro_outro_screens/game_over/gamewon2.png" width="853" height="480"></img>
   <div class="button flex-center" onclick="reloadGame()">Back to Start</div>`;
 }
 
+screen.orientation.addEventListener("change", detectMobileDevice)
 
 //TODO
 function detectMobileDevice() {
-    if (window.innerWidth < 500 && window.innerHeight < 900) {
-      document.getElementById("rotationAlert").classList.remove("d-none");
-
-    }
+  if (window.innerWidth < 500 && window.innerHeight < 900) {
+    checkMobileOrientation()
+  }
 }
 
 function checkMobileOrientation() {
-    if (!window.matchMedia("(orientation: landscape)").matches) {
-      document.getElementById("rotationAlert").classList.remove("d-none");
-    } else {
-      document.getElementById("rotationAlert").classList.add("d-none");
-  
-    }
+  if (screen.orientation.angle < 90) {
+    document.getElementById("rotationAlert").classList.remove("d-none");
+  } else {
+    document.getElementById("rotationAlert").classList.add("d-none");
   }
+  
+// console.log(screen.orientation.angle);
+}
 
 
-  function touchStart() {
-    document.getElementById("btn-left").addEventListener("touchstart", (e) => {
-      keyboard.KEY_LEFT = true;
-      e.preventDefault();
-    });
-    document.getElementById("btn-right").addEventListener("touchstart", (e) => {
-      keyboard.KEY_RIGHT = true;
-      console.log("Läuft rechts");
-      e.preventDefault();
-    });
-    document.getElementById("btn-jump").addEventListener("touchstart", (e) => {
-      keyboard.KEY_SPACE = true;
-      e.preventDefault();
-    });
-    document.getElementById("btn-throw").addEventListener("touchstart", (e) => {
-      keyboard.KEY_D = true;
-      e.preventDefault();
-    });
-    document.getElementById("btn-sound").addEventListener("touchstart", (e) => {
-      toggleSound();
-      e.preventDefault();
-    });
-    document.getElementById("btn-fullscreen").addEventListener("touchstart", (e) => {
+
+function touchStart() {
+  document.getElementById("btn-left").addEventListener("touchstart", (e) => {
+    keyboard.KEY_LEFT = true;
+    e.preventDefault();
+  });
+  document.getElementById("btn-right").addEventListener("touchstart", (e) => {
+    keyboard.KEY_RIGHT = true;
+    console.log("Läuft rechts");
+    e.preventDefault();
+  });
+  document.getElementById("btn-jump").addEventListener("touchstart", (e) => {
+    keyboard.KEY_SPACE = true;
+    e.preventDefault();
+  });
+  document.getElementById("btn-throw").addEventListener("touchstart", (e) => {
+    keyboard.KEY_D = true;
+    e.preventDefault();
+  });
+  document.getElementById("btn-sound").addEventListener("touchstart", (e) => {
+    toggleSound();
+    e.preventDefault();
+  });
+  document.getElementById("btn-fullscreen").addEventListener("touchstart", (e) => {
       toggleFullscreen();
       e.preventDefault();
     });
-  }
-  
-  function touchEnd() {
-    document.getElementById("btn-left").addEventListener("touchend", (e) => {
-      keyboard.LEFT = false;
-      e.preventDefault();
-    });
-    document.getElementById("btn-right").addEventListener("touchend", (e) => {
-      keyboard.RIGHT = false;
-      console.log(keyboard.RIGHT);
-      e.preventDefault();
-    });
-    document.getElementById("btn-jump").addEventListener("touchend", (e) => {
-      keyboard.SPACE = false;
-      e.preventDefault();
-    });
-    document.getElementById("btn-throw").addEventListener("touchend", (e) => {
-      keyboard.D = false;
-      e.preventDefault();
-    });
-    document.getElementById("btn-sound").addEventListener("touchstart", (e) => {
-      keyboard.KEY_M = false;
-      e.preventDefault();
-    });
-    document.getElementById("btn-fullscreen").addEventListener("touchstart", (e) => {
+}
+
+function touchEnd() {
+  document.getElementById("btn-left").addEventListener("touchend", (e) => {
+    keyboard.LEFT = false;
+    e.preventDefault();
+  });
+  document.getElementById("btn-right").addEventListener("touchend", (e) => {
+    keyboard.RIGHT = false;
+    console.log(keyboard.RIGHT);
+    e.preventDefault();
+  });
+  document.getElementById("btn-jump").addEventListener("touchend", (e) => {
+    keyboard.SPACE = false;
+    e.preventDefault();
+  });
+  document.getElementById("btn-throw").addEventListener("touchend", (e) => {
+    keyboard.D = false;
+    e.preventDefault();
+  });
+  document.getElementById("btn-sound").addEventListener("touchstart", (e) => {
+    keyboard.KEY_M = false;
+    e.preventDefault();
+  });
+  document.getElementById("btn-fullscreen").addEventListener("touchstart", (e) => {
       keyboard.KEY_P = false;
       e.preventDefault();
     });
-  }
+}
 
-
-  function toggleFullscreen() {
-    let fullscreen = document.getElementById("fullscreen");
-    if (!isFullScreen) {
-      enterFullscreen(fullscreen);
-      isFullScreen = true}
-      else {
-        exitFullscreen();
-        isFullScreen = false;
-      }
+function toggleFullscreen() {
+  let fullscreen = document.getElementById("fullscreen");
+  if (!isFullScreen) {
+    enterFullscreen(fullscreen);
+    isFullScreen = true;
+  } else {
+    exitFullscreen();
+    isFullScreen = false;
   }
-  
+}
+
 function enterFullscreen(element) {
-  if(element.requestFullscreen) {
+  if (element.requestFullscreen) {
     element.requestFullscreen();
-  } else if(element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+  } else if (element.msRequestFullscreen) {
+    // for IE11 (remove June 15, 2022)
     element.msRequestFullscreen();
-  } else if(element.webkitRequestFullscreen) {  // iOS Safari
+  } else if (element.webkitRequestFullscreen) {
+    // iOS Safari
     element.webkitRequestFullscreen();
   }
 }
 
 function exitFullscreen() {
-  if(document.exitFullscreen) {
+  if (document.exitFullscreen) {
     document.exitFullscreen();
-  } else if(document.webkitExitFullscreen) {
+  } else if (document.webkitExitFullscreen) {
     document.webkitExitFullscreen();
   }
 }
 
-
 function toggleSound() {
-    let soundicon = document.getElementById('soundicon');
-    if (soundActive) {
-        soundActive = false;
-        world.backgroundMusic.volume = 0.0;
-        soundicon.src = './img/1_controls/muted.png';
-    }  else {
-        soundActive = true;
-        world.backgroundMusic.volume = 0.3;
-        soundicon.src = './img/1_controls/loud.png';
-    }
+  let soundicon = document.getElementById("soundicon");
+  if (isSoundActive) {
+    playAudioFiles(isSoundActive);
+    soundicon.src = "./img/1_controls/muted.png";
+  } else {
+    playAudioFiles(isSoundActive);
+    soundicon.src = "./img/1_controls/loud.png";
+  }
+  isSoundActive = !isSoundActive;
+}
+
+function playAudioFiles(boolean) {
+  world.character.walking_sound.muted = boolean;
+  world.character.hurt_sound.muted = boolean;
+  world.character.dead_sound.muted = boolean;
+  world.character.jump_sound.muted = boolean;
+  world.chickenHurt_sound.muted = boolean;
+  world.endbossDead_sound = boolean;
+  world.backgroundMusic.muted = boolean;
 }

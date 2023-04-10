@@ -56,28 +56,26 @@
     <div id="fullscreen">
     <h1 class="hidemobile">El Pollo Loco</h1>
     <div id="rotationAlert" class="flex-center d-none"><div class="flex-center"><img src="./img/1_controls/rotate.png">Please rotate your device.</div></div>
-    <div id="fullscreenalert" class="d-none">Please enter fullscreen</div>
-
     
         <!-- Startscreen starts here -->
         <div id="startscreen" class="flex-center d-none">
             <img src="./img/9_intro_outro_screens/start/startscreen_1.png">
             <div class="button flex-center" onclick="startGame()">Start Game</div>
         </div>
+
         <!-- Endscreen starts here -->
         <div id="endscreen" class="d-none">
         </div>
 
         <!-- Canvas starts here -->
-
         <canvas class="d-none" id="canvas" width="720" height="480">
             Your browser does not support canvas element.
         </canvas>
         
-       
+       <!-- Mobile controls starts here -->
         <div class="controls-container-bottom">
             <div class="btns btns-top">
-                <div id="btn-fullscreen" class="settings-btn d-none" onclick="toggleFullscreen()"><img src="./img/1_controls/fullscreen.png"></div>
+                <div id="btn-fullscreen" class="settings-btn d-none" onclick="toggleFullscreen() "><img src="./img/1_controls/fullscreen.png"></div>
                 <div id="btn-sound" class="settings-btn d-none" onclick="toggleSound()"><img id="soundicon"></div>
             </div>
             <div class="btns btns-left">

@@ -15,6 +15,8 @@ let isFullScreen = false;
 function init() {
   document.getElementById("startscreen").classList.remove("d-none");
   detectMobileDevice();
+  touchStart();
+  touchEnd();
 }
  
 
@@ -26,8 +28,6 @@ function startGame() {
   canvas.classList.remove("d-none");
   world = new World(canvas, keyboard, level1);
   toggleSound();
-  touchStart();
-  touchEnd();
 }
 
 function reloadGame(){
@@ -127,29 +127,18 @@ function renderGameWonScreen() {
 function detectMobileDevice() {
     if (window.innerWidth < 500 && window.innerHeight < 900) {
       document.getElementById("rotationAlert").classList.remove("d-none");
-  
-      checkMobileOrientation();
+
     }
 }
 
 function checkMobileOrientation() {
     if (!window.matchMedia("(orientation: landscape)").matches) {
       document.getElementById("rotationAlert").classList.remove("d-none");
-    //   document.getElementById("fullscreenalert").classList.add("d-none");
     } else {
       document.getElementById("rotationAlert").classList.add("d-none");
   
-    //   checkFullscreen();
     }
   }
-
-//   function checkFullscreen() {
-//     if (!document.fullscreenElement) {
-//       document.getElementById("fullscreenalert").classList.remove("d-none");
-//     }
-//   }
-
-  window.addEventListener("orientationchange", checkMobileOrientation);
 
 
   function touchStart() {
@@ -170,6 +159,14 @@ function checkMobileOrientation() {
       keyboard.KEY_D = true;
       e.preventDefault();
     });
+    document.getElementById("btn-sound").addEventListener("touchstart", (e) => {
+      toggleSound();
+      e.preventDefault();
+    });
+    document.getElementById("btn-fullscreen").addEventListener("touchstart", (e) => {
+      toggleFullscreen();
+      e.preventDefault();
+    });
   }
   
   function touchEnd() {
@@ -180,7 +177,6 @@ function checkMobileOrientation() {
     document.getElementById("btn-right").addEventListener("touchend", (e) => {
       keyboard.RIGHT = false;
       console.log(keyboard.RIGHT);
-      console.log("Läuft nicht mehr rechts");
       e.preventDefault();
     });
     document.getElementById("btn-jump").addEventListener("touchend", (e) => {
@@ -189,6 +185,14 @@ function checkMobileOrientation() {
     });
     document.getElementById("btn-throw").addEventListener("touchend", (e) => {
       keyboard.D = false;
+      e.preventDefault();
+    });
+    document.getElementById("btn-sound").addEventListener("touchstart", (e) => {
+      keyboard.KEY_M = false;
+      e.preventDefault();
+    });
+    document.getElementById("btn-fullscreen").addEventListener("touchstart", (e) => {
+      keyboard.KEY_P = false;
       e.preventDefault();
     });
   }

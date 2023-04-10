@@ -151,7 +151,7 @@ function detectMobileDevice() {
 }
 
 function checkMobileOrientation() {
-    if (window.matchMedia("(orientation: landscape)").matches) {
+    if (!window.matchMedia("(orientation: landscape)").matches) {
       document.getElementById("rotationAlert").classList.remove("d-none");
     //   document.getElementById("fullscreenalert").classList.add("d-none");
     } else {

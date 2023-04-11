@@ -184,7 +184,7 @@ class World {
 
   // ---- Sound ----
   playSound(sound) {
-    if (isSoundActive) {
+    if (isSoundMuted) {
       sound.play();
     }
   }

@@ -9,7 +9,7 @@ let gameOverScreens = [
   "img/9_intro_outro_screens/game_over/oh no you lost!.png",
   "img/9_intro_outro_screens/game_over/you lost.png",
 ];
-let isSoundActive = false;
+let isSoundMuted;
 let isFullScreen = false;
 let portrait = window.matchMedia("(orientation: portrait)");
 
@@ -28,7 +28,11 @@ function startGame() {
   canvas = document.getElementById("canvas");
   canvas.classList.remove("d-none");
   world = new World(canvas, keyboard, level1);
-  toggleSound();
+  loadSoundSettings();
+}
+
+function saveAudioSetting() {
+  localStorage.setItem("soundMuted", isSoundMuted);
 }
 
 function reloadGame() {
@@ -260,18 +264,49 @@ function fullscreenchangelog() {
 }
 
 function toggleSound() {
-  let soundicon = document.getElementById("soundicon");
-  if (isSoundActive) {
-    playAudioFiles(isSoundActive);
-    soundicon.src = "./img/1_controls/muted.png";
+  if (isSoundMuted) {
+    muteAudioFiles(isSoundMuted);
   } else {
-    playAudioFiles(isSoundActive);
-    soundicon.src = "./img/1_controls/loud.png";
+    muteAudioFiles(isSoundMuted);
   }
-  isSoundActive = !isSoundActive;
+  // console.log(isSoundActive)
+  isSoundMuted = !isSoundMuted;
+  // console.log(isSoundActive)
+  setSoundIcon();
+  saveAudioSetting();
 }
 
-function playAudioFiles(boolean) {
+function setSoundIcon() {
+  let soundicon = document.getElementById("soundicon");
+  if (isSoundMuted) {
+    soundicon.src = "./img/1_controls/muted.png";
+  } else {
+    soundicon.src = "./img/1_controls/loud.png";
+  }
+}
+
+function loadSoundSettings() {
+  isSoundMuted = localStorage.getItem("soundMuted");
+  setSoundIcon();
+  console.log(isSoundMuted);
+  // toggleSound();
+  // setTimeout(() => {
+  //   toggleSound();
+  // }, 100);
+  console.log(isSoundMuted);
+ 
+}
+
+function turn_Off_On_Sound() {
+  chrome.tabs.query({url: []}, function (tabs) {
+    for (let i = 0; i < tabs.length; i++) {
+      let mutedInfo = tabs[i].mutedInfo;
+      if (mutedInfo) chrome.tabs.update(tabs[i].id, {"muted": true});
+    }
+});
+}
+
+function muteAudioFiles(boolean) {
   world.character.walking_sound.muted = boolean;
   world.character.hurt_sound.muted = boolean;
   world.character.dead_sound.muted = boolean;

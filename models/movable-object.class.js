@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
   lastHit = 0;
   IMAGES_DEAD;
   isAlive = true;
+  world;
 
   applyGravity() {
     setInterval(() => {
@@ -68,9 +69,14 @@ class MovableObject extends DrawableObject {
     return this.energy == 0;
   }
 
-  isKilled() {
+  isKilled(enemy) {
     this.isAlive = false;
+    world.playSound(world.chickenHurt_sound);
     this.speed = 0;
+    setTimeout(() => {
+      let indexofenemy = world.getIndexOfItem(world.level.enemies, enemy)
+      world.level.enemies.splice(indexofenemy, 1)
+    }, 2000);
   }
 
   moveLeft() {
@@ -101,7 +107,7 @@ class MovableObject extends DrawableObject {
   }
 
   bounceUp() {
-    this.speedY = 15;
+    this.speedY = 10;
   }
 
   endGame() {

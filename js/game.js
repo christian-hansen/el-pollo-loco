@@ -11,6 +11,9 @@ let gameOverScreens = [
 ];
 let isSoundActive = false;
 let isFullScreen = false;
+let portrait = window.matchMedia("(orientation: portrait)");
+
+
 
 function init() {
   document.getElementById("startscreen").classList.remove("d-none");
@@ -49,37 +52,39 @@ function showEndScreen() {
   let endscreen = document.getElementById("endscreen");
   if (world.gameWon) {
     endscreen.innerHTML = renderGameWonScreen();
-  } else endscreen.innerHTML = renderGameOverScreen();
+  } else {
+    endscreen.innerHTML = renderRandomGameOverScreen()
+  };
   hideGameUI();
   endscreen.classList.remove("d-none");
 }
 
 window.addEventListener("keydown", (event) => {
-  if (event.keyCode == 39) {
+  if (event.code == 'ArrowRight') {
     keyboard.KEY_RIGHT = true;
   }
-  if (event.keyCode == 37) {
+  if (event.code == 'ArrowLeft') {
     keyboard.KEY_LEFT = true;
   }
-  if (event.keyCode == 32) {
+  if (event.code == 'Space') {
     keyboard.KEY_SPACE = true;
   }
-  if (event.keyCode == 68) {
+  if (event.code == 'KeyD') {
     keyboard.KEY_D = true;
   }
 });
 
 window.addEventListener("keyup", (event) => {
-  if (event.keyCode == 39) {
+  if (event.code == 'ArrowRight') {
     keyboard.KEY_RIGHT = false;
   }
-  if (event.keyCode == 37) {
+  if (event.code == 'ArrowLeft') {
     keyboard.KEY_LEFT = false;
   }
-  if (event.keyCode == 32) {
+  if (event.code == 'Space') {
     keyboard.KEY_SPACE = false;
   }
-  if (event.keyCode == 68) {
+  if (event.code == 'KeyD') {
     keyboard.KEY_D = false;
   }
 });
@@ -104,11 +109,9 @@ function hideGameUI() {
 }
 
 // Templates
-function renderGameOverScreen() {
-  let min = 0;
+function renderRandomGameOverScreen() {
   let max = gameOverScreens.length - 1;
-  let randomScreen = Math.floor(Math.random() * (max - min + 1)) + min;
-
+  let randomScreen = Math.floor(Math.random() * (max - + 1));
   return `<img src="${gameOverScreens[randomScreen]}" width="853" height="480"></img>
   <div class="button flex-center" onclick="reloadGame()">Back to Start</div>`;
 }
@@ -118,9 +121,9 @@ function renderGameWonScreen() {
   <div class="button flex-center" onclick="reloadGame()">Back to Start</div>`;
 }
 
-screen.orientation.addEventListener("change", detectMobileDevice)
+// ---- Mobile detection ----
+portrait.addEventListener("change", () => checkMobileOrientation())
 
-//TODO
 function detectMobileDevice() {
   if (window.innerWidth < 500 && window.innerHeight < 900) {
     checkMobileOrientation()
@@ -128,16 +131,12 @@ function detectMobileDevice() {
 }
 
 function checkMobileOrientation() {
-  if (screen.orientation.angle < 90) {
+  if (portrait.matches) {
     document.getElementById("rotationAlert").classList.remove("d-none");
   } else {
     document.getElementById("rotationAlert").classList.add("d-none");
   }
-  
-// console.log(screen.orientation.angle);
 }
-
-
 
 function touchStart() {
   document.getElementById("btn-left").addEventListener("touchstart", (e) => {

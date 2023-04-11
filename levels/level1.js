@@ -20,6 +20,7 @@ const backgroundImg = [
 const backgroundObjects = [];
 const amountClouds = levelLength;
 const backgroundWidth = 719;
+const end_of_level_x = backgroundWidth * (levelLength - 1)
 const clouds = [];
 
 //Collectable Items
@@ -35,7 +36,8 @@ const level1 = new Level(
   enemies,
   endboss,
   amountCollectableBottles,
-  amountCollectableCoins
+  amountCollectableCoins,
+  end_of_level_x
 );
 
 function generateLevel() {
@@ -47,22 +49,18 @@ function generateLevel() {
 }
 
 function generateBackground() {
+  let bgObject;
   for (let i = 0; i < levelLength; i++) {
     for (let j = 0; j < backgroundImg.length; j++) {
-      if (j < 4) {
-        backgroundObject = new BackgroundObject(
-          backgroundImg[j],
-          backgroundWidth * (i * 2 - 1),
-          0
-        );
+      let bgImage = backgroundImg[j]
+      if (j < (backgroundImg.length / 2)) {
+        bgWidth = backgroundWidth * (i * 2 - 1);
+        bgObject = new BackgroundObject(bgImage, bgWidth, 0);
       } else {
-        backgroundObject = new BackgroundObject(
-          backgroundImg[j],
-          backgroundWidth * (i * 2),
-          0
-        );
+        bgWidth = backgroundWidth * (i * 2);
+        bgObject = new BackgroundObject(bgImage, bgWidth, 0);
       }
-      backgroundObjects.push(backgroundObject);
+      backgroundObjects.push(bgObject);
     }
   }
 }

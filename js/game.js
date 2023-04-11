@@ -72,8 +72,9 @@ window.addEventListener("keydown", (event) => {
   if (event.code == 'KeyD') {
     keyboard.KEY_D = true;
   }
-  if (event.code == 'P') {
-    toggleFullscreen()
+  if (event.code == 'Escape') {
+    keyboard.KEY_ESC = true;
+    leaveFullscreen();
   }
 });
 
@@ -90,13 +91,15 @@ window.addEventListener("keyup", (event) => {
   if (event.code == 'KeyD') {
     keyboard.KEY_D = false;
   }
-  if (event.code == 'KeyP') {
-    toggleFullscreen()
+  if (event.code == 'KeyEscape') {
+    keyboard.KEY_ESC = false;
+    leaveFullscreen();
   }
 });
 
 function showGameUI() {
   document.getElementById("startscreen").classList.add("d-none");
+  document.getElementById("infobtn").classList.add("d-none");
   document.getElementById("btn-fullscreen").classList.remove("d-none");
   document.getElementById("btn-sound").classList.remove("d-none");
   document.getElementById("btn-left").classList.remove("d-none");
@@ -219,10 +222,11 @@ function toggleFullscreen() {
   if (!isFullScreen) {
     document.getElementById('canvas').classList.add('fullscreen');
     document.getElementById('endscreen').classList.add('fullscreen');
-    // document.getElementsByTagName('h1').classList.add('d-none');
+    document.getElementById('mainheadline').classList.add('d-none');
     enterFullscreen(fullscreen);
     isFullScreen = true;
   } else {
+    
     leaveFullscreen();
   }
 }
@@ -245,6 +249,14 @@ function exitFullscreen() {
   } else if (document.webkitExitFullscreen) {
     document.webkitExitFullscreen();
   }
+}
+
+document.addEventListener("fullscreenchange", fullscreenchangelog);
+
+function fullscreenchangelog() {
+  if (!document.fullscreenElement) {
+  leaveFullscreen();
+}
 }
 
 function toggleSound() {
@@ -273,6 +285,6 @@ function leaveFullscreen() {
   if (isFullScreen) {
   document.getElementById('canvas').classList.remove('fullscreen');
   document.getElementById('endscreen').classList.remove('fullscreen');
-  exitFullscreen();
+  document.getElementById('mainheadline').classList.remove('d-none');
   isFullScreen = false;}
 }

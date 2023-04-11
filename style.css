@@ -87,7 +87,7 @@ h1 {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 canvas {
@@ -97,16 +97,6 @@ canvas {
     width: 720px;
     height: 480px;
 }
-
-/* .controls-container-top {
-    display: flex;
-    justify-content: center;
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    right: 23%;
-    margin-top: -370px;
-} */
 
 .controls-container-bottom {
     display: flex;
@@ -146,7 +136,7 @@ canvas {
     margin-top: 5px;
     height: 25px;
     width: 25px;
-    background-color: rgba(255, 221, 0, 0.75);
+    background-color: rgba(255, 221, 0, 0.9);
     border-radius: 100px;
     padding: 10px;
     border: 1px solid black;
@@ -163,39 +153,39 @@ canvas {
 .settings-btn img {
     height: 30px;
     width: 30px;
-    /* background-color: rgba(255, 221, 0, 0.25); */
-    /* border-radius: 100px; */
 }
 
 #controlsdescription {
-    background-color: rgba(160,34,10, 0.75);
+    background-color: rgba(160, 34, 10, 0.75);
     height: 60px;
     width: 100%;
     font-size: 36px;
-    color:rgba(255, 221, 0, 0.9);
+    color: rgba(255, 221, 0, 0.9);
     letter-spacing: 2px;
     text-shadow: 2px 2px rgba(0, 0, 0, 0.6);
+
 }
 
-#controlsdescription > div {
+#controlsdescription>div {
     gap: 50px;
     height: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+
 }
 
-#controlsdescription > div > div {
+#controlsdescription>div>div {
     gap: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#controlsdescription > div > div > img {
+#controlsdescription>div>div>img {
     height: 40px;
     width: 40px;
-    background-color: rgba(255, 221, 0, 0.75);
+    background-color: rgba(255, 221, 0, 0.9);
     border-radius: 100px;
     margin: 5px;
 }
@@ -224,6 +214,7 @@ canvas {
 
 #rotationAlert div {
     flex-direction: column;
+    font-size: 52px;
 }
 
 #rotationAlert img {
@@ -235,9 +226,22 @@ canvas {
     border: 1px solid black;
 }
 
-.full {
-    width: 100% !important;
-    height: 100% !important;
+#infobtn {
+    cursor: pointer;
+    color: rgb(255, 221, 0)
+}
+
+#infobtn:hover {
+    text-decoration: underline;
+    color: rgb(255, 153, 0);
+}
+
+#infobtn img {
+    background-color: rgba(255, 221, 0) !important;
+}
+
+#infobtn:hover img {
+    background-color: rgb(255, 153, 0) !important;
 }
 
 /* Schmal egal wie hoch */

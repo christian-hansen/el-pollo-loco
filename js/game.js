@@ -146,7 +146,6 @@ function touchStart() {
   });
   document.getElementById("btn-right").addEventListener("touchstart", (e) => {
     keyboard.KEY_RIGHT = true;
-    console.log("Läuft rechts");
     e.preventDefault();
   });
   document.getElementById("btn-jump").addEventListener("touchstart", (e) => {
@@ -158,10 +157,12 @@ function touchStart() {
     e.preventDefault();
   });
   document.getElementById("btn-sound").addEventListener("touchstart", (e) => {
+    keyboard.KEY_M = true;
     toggleSound();
     e.preventDefault();
   });
   document.getElementById("btn-fullscreen").addEventListener("touchstart", (e) => {
+    keyboard.KEY_P = true;
       toggleFullscreen();
       e.preventDefault();
     });
@@ -169,20 +170,19 @@ function touchStart() {
 
 function touchEnd() {
   document.getElementById("btn-left").addEventListener("touchend", (e) => {
-    keyboard.LEFT = false;
+    keyboard.KEY_LEFT = false;
     e.preventDefault();
   });
   document.getElementById("btn-right").addEventListener("touchend", (e) => {
-    keyboard.RIGHT = false;
-    console.log(keyboard.RIGHT);
+    keyboard.KEY_RIGHT = false;
     e.preventDefault();
   });
   document.getElementById("btn-jump").addEventListener("touchend", (e) => {
-    keyboard.SPACE = false;
+    keyboard.KEY_SPACE = false;
     e.preventDefault();
   });
   document.getElementById("btn-throw").addEventListener("touchend", (e) => {
-    keyboard.D = false;
+    keyboard.KEY_D = false;
     e.preventDefault();
   });
   document.getElementById("btn-sound").addEventListener("touchstart", (e) => {

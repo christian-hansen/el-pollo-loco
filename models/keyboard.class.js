@@ -1,10 +1,10 @@
 class Keyboard {
-KEY_LEFT = false; //keyCode 37
-KEY_RIGHT = false; //39
-KEY_SPACE = false; //32
-KEY_D = false; //68
-KEY_P = false; //80
-KEY_m = false; //77
+KEY_LEFT = false;
+KEY_RIGHT = false;
+KEY_SPACE = false;
+KEY_D = false;
+KEY_ESC = false;
+KEY_M = false;
 }
 
 

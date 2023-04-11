@@ -72,6 +72,9 @@ window.addEventListener("keydown", (event) => {
   if (event.code == 'KeyD') {
     keyboard.KEY_D = true;
   }
+  if (event.code == 'P') {
+    toggleFullscreen()
+  }
 });
 
 window.addEventListener("keyup", (event) => {
@@ -86,6 +89,9 @@ window.addEventListener("keyup", (event) => {
   }
   if (event.code == 'KeyD') {
     keyboard.KEY_D = false;
+  }
+  if (event.code == 'KeyP') {
+    toggleFullscreen()
   }
 });
 
@@ -145,8 +151,10 @@ function detectMobileDevice() {
 function checkMobileOrientation() {
   if (portrait.matches) {
     document.getElementById("rotationAlert").classList.remove("d-none");
+    document.getElementById("controlsdescription").classList.add("d-none");
   } else {
     document.getElementById("rotationAlert").classList.add("d-none");
+    document.getElementById("controlsdescription").classList.remove("d-none");
   }
 }
 
@@ -173,7 +181,7 @@ function touchStart() {
     e.preventDefault();
   });
   document.getElementById("btn-fullscreen").addEventListener("touchstart", (e) => {
-    keyboard.KEY_P = true;
+    keyboard.KEY_ESC = true;
       toggleFullscreen();
       e.preventDefault();
     });
@@ -201,7 +209,7 @@ function touchEnd() {
     e.preventDefault();
   });
   document.getElementById("btn-fullscreen").addEventListener("touchstart", (e) => {
-      keyboard.KEY_P = false;
+      keyboard.KEY_ESC = false;
       e.preventDefault();
     });
 }
@@ -215,10 +223,7 @@ function toggleFullscreen() {
     enterFullscreen(fullscreen);
     isFullScreen = true;
   } else {
-    document.getElementById('canvas').classList.remove('fullscreen');
-    document.getElementById('endscreen').classList.remove('fullscreen');
-    exitFullscreen();
-    isFullScreen = false;
+    leaveFullscreen();
   }
 }
 
@@ -262,4 +267,12 @@ function playAudioFiles(boolean) {
   world.chickenHurt_sound.muted = boolean;
   world.endbossDead_sound = boolean;
   world.backgroundMusic.muted = boolean;
+}
+
+function leaveFullscreen() {
+  if (isFullScreen) {
+  document.getElementById('canvas').classList.remove('fullscreen');
+  document.getElementById('endscreen').classList.remove('fullscreen');
+  exitFullscreen();
+  isFullScreen = false;}
 }

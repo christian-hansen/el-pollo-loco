@@ -288,3 +288,17 @@ function leaveFullscreen() {
   document.getElementById('mainheadline').classList.remove('d-none');
   isFullScreen = false;}
 }
+
+// function loadAllImages() {
+//   world.character.loadImages(world.character.IMAGES_DEAD);
+//   world.character.loadImages(world.character.IMAGES_IDLE);
+//   world.character.loadImages(world.character.IMAGES_WALKING);
+//     world.character.loadImages(world.character.IMAGES_JUMPING);
+//     world.character.loadImages(world.character.IMAGES_HURT);
+//     world.character.loadImages(world.character.IMAGES_LONGIDLE);
+
+//  world.statusbar[0].loadImages(world.statusbar[0].IMAGES);  
+//  world.statusbar[1].loadImages(world.statusbar[1].IMAGES);  
+//  world.statusbar[2].loadImages(world.statusbar[2].IMAGES);  
+//  world.statusbar[3].loadImages(world.statusbar[3].IMAGES);  
+// }

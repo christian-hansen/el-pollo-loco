@@ -20,7 +20,7 @@ const backgroundImg = [
 const backgroundObjects = [];
 const amountClouds = levelLength;
 const backgroundWidth = 719;
-const end_of_level_x = backgroundWidth * (levelLength - 1)
+const end_of_level_x = backgroundWidth * (levelLength - 1);
 const clouds = [];
 
 //Collectable Items

@@ -110,14 +110,26 @@ function hideGameUI() {
 
 // Templates
 function renderRandomGameOverScreen() {
+  let endScreenClass;
+  if (isFullScreen) {
+    endScreenClass = "fullendscreen";
+  } else {
+    endScreenClass = "defaultendscreen";
+  }
   let max = gameOverScreens.length - 1;
   let randomScreen = Math.floor(Math.random() * (max - + 1));
-  return `<img src="${gameOverScreens[randomScreen]}" width="853" height="480"></img>
+  return `<img src="${gameOverScreens[randomScreen]}" class="${endScreenClass}"></img>
   <div class="button flex-center" onclick="reloadGame()">Back to Start</div>`;
 }
 
 function renderGameWonScreen() {
-  return `<img src="img/9_intro_outro_screens/game_over/gamewon2.png" width="853" height="480"></img>
+  let endScreenClass;
+  if (isFullScreen) {
+    endScreenClass = "fullendscreen";
+  } else {
+    endScreenClass = "defaultendscreen";
+  }
+  return `<img src="img/9_intro_outro_screens/game_over/gamewon2.png" class= ${endScreenClass}></img>
   <div class="button flex-center" onclick="reloadGame()">Back to Start</div>`;
 }
 
@@ -197,9 +209,14 @@ function touchEnd() {
 function toggleFullscreen() {
   let fullscreen = document.getElementById("fullscreen");
   if (!isFullScreen) {
+    document.getElementById('canvas').classList.add('fullscreen');
+    document.getElementById('endscreen').classList.add('fullscreen');
+    // document.getElementsByTagName('h1').classList.add('d-none');
     enterFullscreen(fullscreen);
     isFullScreen = true;
   } else {
+    document.getElementById('canvas').classList.remove('fullscreen');
+    document.getElementById('endscreen').classList.remove('fullscreen');
     exitFullscreen();
     isFullScreen = false;
   }

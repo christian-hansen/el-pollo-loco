@@ -4,12 +4,21 @@
     /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%
+}
 
 body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
     min-height: 100vh;
     margin: 0;
     background-image: url('./img/9_background/desert3.png');
@@ -20,7 +29,19 @@ body {
 }
 
 .fullscreen {
-    position: relative;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.defaultendscreen {
+    width: 853px;
+    height: 480px;
+}
+
+.fullendscreen {
+    height: 100vh;
+    width: 100vw;
 }
 
 h1 {
@@ -31,14 +52,11 @@ h1 {
     text-align: center;
 }
 
-#startscreen, #endscreen {
+#startscreen,
+#endscreen {
     position: relative
 }
 
-#startscreen img, #endscreen img {
-    width: 853px;
-    height: 480px;
-}
 
 .button {
     z-index: 3;
@@ -58,7 +76,7 @@ h1 {
     height: 40px;
     padding: 8px;
     margin: 15px auto auto auto;
-cursor: pointer;
+    cursor: pointer;
 }
 
 .flex-center {
@@ -134,7 +152,7 @@ canvas {
     cursor: pointer;
 }
 
-.control-btn img  {
+.control-btn img {
     height: 70px;
     width: 70px;
     background-color: rgba(255, 221, 0, 0.25);
@@ -160,7 +178,7 @@ canvas {
     font-size: 60px;
     text-align: center;
     letter-spacing: 2px;
-    text-shadow: 2px 2px rgba(0, 0, 0, 0.6);    
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.6);
 }
 
 #rotationAlert div {
@@ -179,7 +197,7 @@ canvas {
 .full {
     width: 100% !important;
     height: 100% !important;
-  }
+}
 
 /* Schmal egal wie hoch */
 @media only screen and (max-width: 914px) {
@@ -187,7 +205,8 @@ canvas {
         width: 100%;
     }
 
-    #startscreen img, #endscreen img {
+    #startscreen img,
+    #endscreen img {
         width: 100%;
         height: auto;
     }
@@ -205,7 +224,8 @@ canvas {
         height: 100vh;
     }
 
-    #startscreen img, #endscreen img {
+    #startscreen img,
+    #endscreen img {
         height: 100vh;
         width: 720px;
     }

@@ -92,6 +92,8 @@ class World {
       this.flipImage(object);
     }
     object.draw(this.ctx);
+    // object.drawFrame(this.ctx);
+    object.drawHitBox(this.ctx);
 
     if (object.flippedGraphics) {
       this.flipImageBack(object);

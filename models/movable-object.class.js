@@ -28,16 +28,15 @@ class MovableObject extends DrawableObject {
   }
 
   isJumping() {
-    return this.y - this.ground < -30;
+    return this.y - this.ground < 0 && this.speedY < 0;
   }
 
   isColliding(obj) {
     return (
       (obj.isAlive || obj instanceof Coin || obj instanceof Bottle) &&
-      this.x + this.width - this.offset.right >= obj.x + obj.offset.left &&
+      this.x + this.width - this.offset.right >= obj.x + (obj.offset.left/2) &&
       this.y + this.height > obj.y + obj.offset.top &&
-      this.x + this.offset.left - obj.width / 2 <
-        obj.x + obj.width - obj.offset.right &&
+      this.x + this.offset.left - (obj.width/2) < obj.x + obj.width - obj.offset.right &&
       this.y + this.offset.top < obj.y + obj.height
     );
   }

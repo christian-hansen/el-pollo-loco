@@ -1,4 +1,4 @@
-const levelLength = 4; // Defines the background width and amount of background elements, also the amount of enemies and collectable items;
+const levelLength = 6; // Defines the background width and amount of background elements, also the amount of enemies and collectable items;
 
 // Enemy elements
 const amountEndboss = 1;

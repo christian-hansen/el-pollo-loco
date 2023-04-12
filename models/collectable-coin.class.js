@@ -9,8 +9,11 @@ class Coin extends CollectableObject {
     right: 60,
   };
   collect_sound = new Audio("audio/collect_coin.wav");
-
-  IMAGES = ["img/8_coin/coin_1.png", "img/8_coin/coin_2.png"];
+  IMAGES = [
+    "img/8_coin/coin_1.png", 
+    "img/8_coin/coin_2.png"
+  ];
+  
   constructor(x) {
     super().loadImages(this.IMAGES);
     this.x = x + Math.random() * 400;

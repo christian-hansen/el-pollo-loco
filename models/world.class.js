@@ -16,7 +16,6 @@ class World {
   endboss;
   backgroundMusic =  new Audio('audio/background.mp3');
   chickenHurt_sound = new Audio('audio/chickenouch.wav');
-  
   gameWon = false;
 
 

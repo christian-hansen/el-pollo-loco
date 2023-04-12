@@ -40,6 +40,7 @@ class World {
   run() {
     setInterval(() => {
       this.checkCollisions();
+      this.checkCharacterIsLeftOfEndboss();
     }, 100);
     setInterval(() => {
       this.checkCollection();
@@ -147,6 +148,12 @@ class World {
     });
   }
 
+  checkCharacterIsLeftOfEndboss() {
+    if (this.isBehindEndboss()) {
+    this.hitCharacter(100);
+  }
+  }
+
   // ---- Item collection ----
   checkCollection() {
     this.level.collectableItems.forEach((item) => {
@@ -176,11 +183,14 @@ class World {
   }
 
   checkThrowObjects() {
-    if (this.isBottleAvailabe()) {
-      let bottle = new ThrowableBottle(this.character.x + 100, this.character.y + 100);
+    if (this.isBottleAvailabe() && this.character.isLookingLeft()) {
+      let bottle = new ThrowableBottle(this.character.x - 25, this.character.y + 100, "left");
       this.throwBottle(bottle);
-    }
+    } else if (this.isBottleAvailabe()) {
+      let bottle = new ThrowableBottle(this.character.x + 100, this.character.y + 100, "right");
+      this.throwBottle(bottle);
   }
+}
 
   // ---- Sound ----
   playSound(sound) {
@@ -211,6 +221,10 @@ class World {
 
   isBottleAvailabe() {
     return this.keyboard.KEY_D && this.collectedBottles > 0;
+  }
+
+  isBehindEndboss() {
+    return this.level.endboss[0].x + this.level.endboss[0].width < this.character.x + this.character.width;
   }
 
   throwBottle(bottle) {

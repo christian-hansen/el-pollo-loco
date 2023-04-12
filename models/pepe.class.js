@@ -149,6 +149,10 @@ class Pepe extends MovableObject {
     this.flippedGraphics = true;
   }
 
+  isLookingLeft() {
+    return this.flippedGraphics;
+  }
+
   isMoving() {
     return this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT;
   }

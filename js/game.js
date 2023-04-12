@@ -28,7 +28,6 @@ function startGame() {
   canvas = document.getElementById("canvas");
   canvas.classList.remove("d-none");
   world = new World(canvas, keyboard, level1);
-  loadAllImages();
   loadSoundSettings();
 }
 

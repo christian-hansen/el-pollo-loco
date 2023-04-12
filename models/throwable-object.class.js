@@ -5,11 +5,16 @@ class ThrowableObject extends MovableObject {
     this.animate();
   }
 
-  throw() {
+  throw(direction) {
     this.applyGravity();
-
+    
+    if (direction === "right") {
     setInterval(() => {
       this.x += 5;
-    }, 25);
+    }, 25);}
+    else if (direction === "left") {
+      setInterval(() => {
+        this.x -= 5;
+      }, 25);}
   }
 }

@@ -28,7 +28,7 @@ function startGame() {
   canvas = document.getElementById("canvas");
   canvas.classList.remove("d-none");
   world = new World(canvas, keyboard, level1);
-  loadSoundSettings();
+  loadSoundSettings(); 
 }
 
 function reloadGame() {
@@ -94,6 +94,10 @@ window.addEventListener("keydown", (event) => {
   if (event.code == 'KeyD') {
     keyboard.KEY_D = true;
   }
+  if (event.code == 'KeyM') {
+    keyboard.KEY_M = true;
+    toggleSound();
+  }
   if (event.code == 'Escape') {
     keyboard.KEY_ESC = true;
     leaveFullscreen();
@@ -112,6 +116,9 @@ window.addEventListener("keyup", (event) => {
   }
   if (event.code == 'KeyD') {
     keyboard.KEY_D = false;
+  }
+  if (event.code == 'KeyM') {
+    keyboard.KEY_M = false;
   }
   if (event.code == 'KeyEscape') {
     keyboard.KEY_ESC = false;
@@ -194,6 +201,7 @@ function touchEnd() {
 }
 
 // ---- Functions for fullscreen functionality ----
+
 function toggleFullscreen() {
   let fullscreen = document.getElementById("fullscreen");
   if (!isFullScreen) {
@@ -237,11 +245,10 @@ function fullscreenchangelog() {
 }
 
 // ---- Functions for audio ----
-
 function toggleSound() {
-  isSoundMuted = !isSoundMuted;
-  muteAudioFiles(isSoundMuted);  
+  muteAudioFiles(isSoundMuted);
   setSoundIcon();
+  isSoundMuted = !isSoundMuted;
   saveAudioSetting();
 }
 
@@ -258,9 +265,22 @@ function saveAudioSetting() {
   localStorage.setItem("isEPLSoundMuted", isSoundMuted);
 }
 
+function initSoundSettings() {
+  let initsound = localStorage.getItem("isEPLSoundMuted");
+  if (initsound == 'false') {
+    isSoundMuted = true;
+  } if (initsound == 'true') {
+    isSoundMuted = false;
+  }
+  if (initsound == null) {
+    isSoundMuted = true;
+  }
+}
+
 function loadSoundSettings() {
-  isSoundMuted = localStorage.getItem("isEPLSoundMuted");
+  initSoundSettings();
   setSoundIcon();
+  toggleSound();
 }
 
 function muteAudioFiles(boolean) {
@@ -269,8 +289,11 @@ function muteAudioFiles(boolean) {
   world.character.dead_sound.muted = boolean;
   world.character.jump_sound.muted = boolean;
   world.chickenHurt_sound.muted = boolean;
-  world.endbossDead_sound = boolean;
+  world.level.endboss[0].endbossDead_sound.muted = boolean;
   world.backgroundMusic.muted = boolean;
+  for (let i = 0; i < world.level.collectableItems.length; i++) {
+    world.level.collectableItems[i].collect_sound.muted = boolean;
+  };
 }
 
 function leaveFullscreen() {

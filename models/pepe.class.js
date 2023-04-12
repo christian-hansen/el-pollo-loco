@@ -4,7 +4,7 @@ class Pepe extends MovableObject {
   ground = 125;
   height = 300;
   width = 150;
-  speed = 5;
+  speed = 7;
   offset = {
     top: 140,
     bottom: 160,

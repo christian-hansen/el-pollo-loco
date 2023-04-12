@@ -20,6 +20,7 @@ function init() {
   detectMobileDevice();
   touchStart();
   touchEnd();
+
 }
 
 function startGame() {
@@ -31,9 +32,7 @@ function startGame() {
   loadSoundSettings();
 }
 
-function saveAudioSetting() {
-  localStorage.setItem("soundMuted", isSoundMuted);
-}
+
 
 function reloadGame() {
   window.location.reload(true);
@@ -264,14 +263,8 @@ function fullscreenchangelog() {
 }
 
 function toggleSound() {
-  if (isSoundMuted) {
-    muteAudioFiles(isSoundMuted);
-  } else {
-    muteAudioFiles(isSoundMuted);
-  }
-  // console.log(isSoundActive)
   isSoundMuted = !isSoundMuted;
-  // console.log(isSoundActive)
+  muteAudioFiles(isSoundMuted);  
   setSoundIcon();
   saveAudioSetting();
 }
@@ -285,25 +278,13 @@ function setSoundIcon() {
   }
 }
 
-function loadSoundSettings() {
-  isSoundMuted = localStorage.getItem("soundMuted");
-  setSoundIcon();
-  console.log(isSoundMuted);
-  // toggleSound();
-  // setTimeout(() => {
-  //   toggleSound();
-  // }, 100);
-  console.log(isSoundMuted);
- 
+function saveAudioSetting() {
+  localStorage.setItem("isEPLSoundMuted", isSoundMuted);
 }
 
-function turn_Off_On_Sound() {
-  chrome.tabs.query({url: []}, function (tabs) {
-    for (let i = 0; i < tabs.length; i++) {
-      let mutedInfo = tabs[i].mutedInfo;
-      if (mutedInfo) chrome.tabs.update(tabs[i].id, {"muted": true});
-    }
-});
+function loadSoundSettings() {
+  isSoundMuted = localStorage.getItem("isEPLSoundMuted");
+  setSoundIcon();
 }
 
 function muteAudioFiles(boolean) {
@@ -325,12 +306,12 @@ function leaveFullscreen() {
 }
 
 // function loadAllImages() {
-//   world.character.loadImages(world.character.IMAGES_DEAD);
-//   world.character.loadImages(world.character.IMAGES_IDLE);
-//   world.character.loadImages(world.character.IMAGES_WALKING);
-//     world.character.loadImages(world.character.IMAGES_JUMPING);
-//     world.character.loadImages(world.character.IMAGES_HURT);
-//     world.character.loadImages(world.character.IMAGES_LONGIDLE);
+//  world.character.loadImages(world.character.IMAGES_DEAD);
+//  world.character.loadImages(world.character.IMAGES_IDLE);
+//  world.character.loadImages(world.character.IMAGES_WALKING);
+//  world.character.loadImages(world.character.IMAGES_JUMPING);
+//  world.character.loadImages(world.character.IMAGES_HURT);
+//  world.character.loadImages(world.character.IMAGES_LONGIDLE);
 
 //  world.statusbar[0].loadImages(world.statusbar[0].IMAGES);  
 //  world.statusbar[1].loadImages(world.statusbar[1].IMAGES);  

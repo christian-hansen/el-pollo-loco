@@ -81,7 +81,7 @@ class Endboss extends MovableObject {
         i = 25; // resets endboss' alert/attack animation loop
       }
       i++;
-    }, 150);
+    }, 100);
   }
 
   /**

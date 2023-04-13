@@ -36,13 +36,20 @@ function startGame() {
   canvas.classList.remove("d-none");
   world = new World(canvas, keyboard, level1);
   loadSoundSettings();
+
+  console.log(world);
 }
 
 /**
  * The function reloads the current webpage.
  */
+// function reloadGame() {
+//   window.location.reload(true);
+// }
+
 function reloadGame() {
-  window.location.reload(true);
+  document.getElementById('endscreen').classList.add('d-none')
+  startGame()
 }
 
 /**
@@ -55,6 +62,7 @@ function stopGame() {
     document.getElementById("canvas").classList.add("d-none");
     world.backgroundMusic.pause();
     showEndScreen();
+    resetLevel();
   }, 1000);
 }
 

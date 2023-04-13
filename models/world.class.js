@@ -9,7 +9,6 @@ class World {
   throwableObjects = [];
   collectedBottles = 0;
   collectedCoins = 0;
-  endboss;
   backgroundMusic = new Audio("audio/background.mp3");
   chickenHurt_sound = new Audio("audio/chickenouch.wav");
   gameWon = false;
@@ -46,6 +45,7 @@ class World {
     }, 25);
     setInterval(() => {
       this.checkThrowObjects();
+
     }, 150);
   }
 
@@ -56,6 +56,7 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
+
     this.drawObjects();
     this.ctx.translate(-this.camera_x, 0);
     // ---- Space for fixed objects -----
@@ -64,6 +65,7 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     this.addToMap(this.character);
     this.drawEnemies();
+    this.drawThrowableObjects();
     this.ctx.translate(-this.camera_x, 0);
 
     // "Draw" gets called on repeat
@@ -88,6 +90,10 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.collectableItems);
+
+  }
+
+  drawThrowableObjects() {
     this.addObjectsToMap(this.throwableObjects);
   }
 
@@ -148,13 +154,16 @@ class World {
 
   // ---- Enemy collion functions ----
 
+ 
   /**
-   * The function checks for collisions between the player and enemies, endboss, and endboss bottles.
+   * The function checks for collisions between various game objects.
    */
   checkCollisions() {
     this.checkEnemyCollision();
     this.checkEndbossCollision();
     this.checkEndbossBottleCollision();
+    this.checkBottleGroundCollison();
+    this.checkBottleIsBroken();
   }
 
   /**
@@ -185,17 +194,50 @@ class World {
     });
   }
 
+ 
   /**
-   * This function checks for collision between throwable objects and the endboss in a game and calls a
-   * function to hit the endboss if a collision occurs.
+   * This function checks for collision between throwable objects and the endboss in a game and damages
+   * the endboss if there is a collision.
    */
   checkEndbossBottleCollision() {
     this.throwableObjects.forEach((bottle) => {
       if (this.level.endboss[0].isColliding(bottle)) {
+        bottle.isBroken = true;
+        bottle.acceleration = -1;
         this.hitEndboss(10);
       }
     });
   }
+
+  /**
+   * This function checks if any throwable objects have collided with the ground and marks them as
+   * broken if they have.
+   */
+  checkBottleGroundCollison() {
+    this.throwableObjects.forEach((bottle) => {
+      if (bottle.y > bottle.ground) {
+        bottle.isBroken = true;
+        bottle.removeObject();        
+      }
+    });
+  }
+
+  /**
+   * The function checks if a bottle is broken and removes it from an array of throwable objects if it
+   * is.
+   */
+  checkBottleIsBroken() {
+    this.throwableObjects.forEach((bottle) => {
+      if (bottle.isBroken) {
+        let indexOfBottle = this.getIndexOfItem(this.throwableObjects, bottle);
+        setTimeout(() => {
+          this.throwableObjects.splice(indexOfBottle, 1);
+        }, 250);
+        
+      }
+    });
+  }
+
 
   /**
    * The function checks if the character is behind the endboss and hits the character with 100 damage

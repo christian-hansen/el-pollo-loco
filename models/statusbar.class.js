@@ -7,6 +7,12 @@ class StatusBar extends DrawableObject {
     super();
   }
 
+/**
+ * The function sets the percentage and updates the image accordingly.
+ * @param percentage - The percentage parameter is a number between 0 and 5 that represents the
+ * progress or completion level of a task or process. It is used to update the image displayed by the
+ * code.
+ */
   setPercentage(percentage) {
     this.percentage = percentage; // => 0....5
     let path = this.IMAGES[this.resolveImageIndex()];

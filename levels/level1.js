@@ -3,8 +3,8 @@ const levelLength = 6; // Defines the background width and amount of background 
 // Enemy elements
 const amountEndboss = 1;
 const amountEnemies = levelLength;
-const enemies = [];
-const endboss = [];
+let enemies = [];
+let endboss = [];
 
 //Background Elements
 const backgroundImg = [
@@ -17,19 +17,19 @@ const backgroundImg = [
   "img/5_background/layers/2_second_layer/1.png",
   "img/5_background/layers/1_first_layer/1.png",
 ];
-const backgroundObjects = [];
+let backgroundObjects = [];
 const amountClouds = levelLength;
 const backgroundWidth = 719;
 const end_of_level_x = backgroundWidth * (levelLength - 1);
-const clouds = [];
+let clouds = [];
 
 //Collectable Items
 const amountCollectableBottles = 10;
 const amountCollectableCoins = 10;
-const collectableObjects = [];
+let collectableObjects = [];
 
 //Level Setup
-const level1 = new Level(
+let level1 = new Level(
   clouds,
   backgroundObjects,
   collectableObjects,
@@ -50,6 +50,14 @@ function generateLevel() {
   generateCollectableItems();
   generateEnemies();
   generateEndboss();
+}
+
+function resetLevel() {
+clouds = [];
+enemies = [];
+endboss = [];
+backgroundObjects = []
+collectableObjects = [];
 }
 
 /**

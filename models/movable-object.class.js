@@ -2,7 +2,7 @@ class MovableObject extends DrawableObject {
   speed = 0.15;
   flippedGraphics = false;
   speedY = 0;
-  acceleration = 1;
+  acceleration = 2;
   ground;
   energy = 100;
   lastHit = 0;
@@ -187,14 +187,14 @@ class MovableObject extends DrawableObject {
    * The function sets the vertical speed of an object to 15, allowing it to jump.
    */
   jump() {
-    this.speedY = 15;
+    this.speedY = 20;
   }
 
   /**
    * The function sets the vertical speed of an object to 10, causing it to bounce upwards.
    */
   bounceUp() {
-    this.speedY = 10;
+    this.speedY = 15;
   }
 
   /**

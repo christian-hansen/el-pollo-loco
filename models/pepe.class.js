@@ -1,7 +1,8 @@
 class Pepe extends MovableObject {
   x = 20;
-  y = 125;
-  ground = 125;
+  y = 128;
+  acceleration = 2.2;
+  ground = 128;
   height = 300;
   width = 150;
   speed = 7;
@@ -128,7 +129,7 @@ class Pepe extends MovableObject {
       this.playAnimation(this.IMAGES_JUMPING);
     } else if (this.isMoving()) {
       this.playAnimation(this.IMAGES_WALKING);
-      this.y = 125; //TODO check!!!
+      this.y = this.ground;
     } else {
       this.playAnimation(this.IMAGES_IDLE);
     }

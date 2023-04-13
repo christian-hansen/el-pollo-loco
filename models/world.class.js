@@ -93,6 +93,9 @@ class World {
 
   }
 
+  /**
+   * The function adds throwable objects to a map.
+   */
   drawThrowableObjects() {
     this.addObjectsToMap(this.throwableObjects);
   }
@@ -237,7 +240,6 @@ class World {
       }
     });
   }
-
 
   /**
    * The function checks if the character is behind the endboss and hits the character with 100 damage

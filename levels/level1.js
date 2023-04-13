@@ -29,16 +29,7 @@ const amountCollectableCoins = 10;
 let collectableObjects = [];
 
 //Level Setup
-let level1 = new Level(
-  clouds,
-  backgroundObjects,
-  collectableObjects,
-  enemies,
-  endboss,
-  amountCollectableBottles,
-  amountCollectableCoins,
-  end_of_level_x
-);
+let level1;
 
 /**
  * The function generates a level with a background, clouds, collectable items, enemies, and an end
@@ -50,8 +41,28 @@ function generateLevel() {
   generateCollectableItems();
   generateEnemies();
   generateEndboss();
+  setNewLevel()
 }
 
+/**
+ * The function sets a new level with specified objects and parameters.
+ */
+function setNewLevel() {
+  level1 = new Level(
+    clouds,
+    backgroundObjects,
+    collectableObjects,
+    enemies,
+    endboss,
+    amountCollectableBottles,
+    amountCollectableCoins,
+    end_of_level_x
+  )
+}
+
+/**
+ * The function resets various arrays used in a game level.
+ */
 function resetLevel() {
 clouds = [];
 enemies = [];

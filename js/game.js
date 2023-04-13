@@ -36,24 +36,18 @@ function startGame() {
   canvas.classList.remove("d-none");
   world = new World(canvas, keyboard, level1);
   loadSoundSettings();
-
-  console.log(world);
 }
 
 /**
- * The function reloads the current webpage.
+ * The function reloads the game by hiding the end screen and starting the game again.
  */
-// function reloadGame() {
-//   window.location.reload(true);
-// }
-
 function reloadGame() {
   document.getElementById('endscreen').classList.add('d-none')
   startGame()
 }
 
 /**
- * The function stops the game by clearing all intervals, hiding the canvas, pausing the background
+ * The function stops the game by clearing all intervals, hiding the canvas and game UI, pausing the background
  * music, and showing the end screen after a delay of 1 second.
  */
 function stopGame() {

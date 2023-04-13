@@ -5,6 +5,7 @@
  */
 function showGameUI() {
   document.getElementById("startscreen").classList.add("d-none");
+  document.getElementById("controlsdescription").classList.remove("d-none");
   document.getElementById("infobtn").classList.add("d-none");
   document.getElementById("btn-fullscreen").classList.remove("d-none");
   document.getElementById("btn-sound").classList.remove("d-none");
@@ -18,6 +19,7 @@ function showGameUI() {
  * The function hides certain buttons related to game UI.
  */
 function hideGameUI() {
+  document.getElementById("controlsdescription").classList.add("d-none");
   document.getElementById("btn-fullscreen").classList.add("d-none");
   document.getElementById("btn-sound").classList.add("d-none");
   document.getElementById("btn-left").classList.add("d-none");

@@ -40,6 +40,10 @@ const level1 = new Level(
   end_of_level_x
 );
 
+/**
+ * The function generates a level with a background, clouds, collectable items, enemies, and an end
+ * boss.
+ */
 function generateLevel() {
   generateBackground();
   generateClouds();
@@ -48,12 +52,16 @@ function generateLevel() {
   generateEndboss();
 }
 
+/**
+ * This function generates a background by creating multiple instances of BackgroundObject with
+ * different images and widths.
+ */
 function generateBackground() {
   let bgObject;
   for (let i = 0; i < levelLength; i++) {
     for (let j = 0; j < backgroundImg.length; j++) {
-      let bgImage = backgroundImg[j]
-      if (j < (backgroundImg.length / 2)) {
+      let bgImage = backgroundImg[j];
+      if (j < backgroundImg.length / 2) {
         bgWidth = backgroundWidth * (i * 2 - 1);
         bgObject = new BackgroundObject(bgImage, bgWidth, 0);
       } else {
@@ -65,6 +73,10 @@ function generateBackground() {
   }
 }
 
+/**
+ * The function generates a specified number of clouds with random images and locations on the
+ * background.
+ */
 function generateClouds() {
   for (let i = 0; i < amountClouds; i++) {
     let cloudLocation = backgroundWidth * (i + 1) - 500;
@@ -74,6 +86,9 @@ function generateClouds() {
   }
 }
 
+/**
+ * This function generates a specified number of Endboss objects and adds them to an array.
+ */
 function generateEndboss() {
   for (let i = 0; i < amountEndboss; i++) {
     let boss = new Endboss();
@@ -81,6 +96,9 @@ function generateEndboss() {
   }
 }
 
+/**
+ * This function generates a specified number of enemies and adds them to an array.
+ */
 function generateEnemies() {
   for (let i = 0; i < amountEnemies; i++) {
     let enemylocation = (backgroundWidth - 300) * (i + 1);
@@ -90,11 +108,18 @@ function generateEnemies() {
   }
 }
 
+/**
+ * The function generates collectable coins and bottles.
+ */
 function generateCollectableItems() {
   generateCollectableCoins();
   generateCollectableBottles();
 }
 
+/**
+ * This function generates a specified number of collectable coins and adds them to an array of
+ * collectable objects.
+ */
 function generateCollectableCoins() {
   for (let i = 0; i < amountCollectableCoins; i++) {
     let location = (backgroundWidth - 550) * (i + 1);
@@ -103,6 +128,10 @@ function generateCollectableCoins() {
   }
 }
 
+/**
+ * This function generates a specified number of collectable bottles and adds them to an array of
+ * collectable objects.
+ */
 function generateCollectableBottles() {
   for (let i = 0; i < amountCollectableBottles; i++) {
     let location = (backgroundWidth - 550) * (i + 1);

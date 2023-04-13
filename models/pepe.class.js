@@ -90,11 +90,17 @@ class Pepe extends MovableObject {
     this.dead_sound.volume = 0.3;
   }
 
+  /**
+   * The function sets two intervals to move and play animations for a character.
+   */
   animate() {
     setInterval(() => this.moveCharacter(), 1000 / 60);
     setInterval(() => this.playCharacterAnimations(), 8000 / 60);
   }
 
+  /**
+   * The function moves a character in a game world and handles sound effects.
+   */
   moveCharacter() {
     this.walking_sound.pause();
     if (this.canMoveRight()) this.moveRight();
@@ -106,6 +112,9 @@ class Pepe extends MovableObject {
     this.world.camera_x = -this.x + 75;
   }
 
+  /**
+   * The function plays different animations based on the character's state in the game.
+   */
   playCharacterAnimations() {
     if (this.isDead()) {
       this.playDyingAnimation();
@@ -116,7 +125,6 @@ class Pepe extends MovableObject {
       this.hurt_sound.pause();
       this.playAnimation(this.IMAGES_HURT);
     } else if (this.isAboveGround()) {
-
       this.playAnimation(this.IMAGES_JUMPING);
     } else if (this.isMoving()) {
       this.playAnimation(this.IMAGES_WALKING);
@@ -126,7 +134,16 @@ class Pepe extends MovableObject {
     }
   }
 
-  // Start movement functions
+  // ---- Start movement functions ----
+
+  /**
+   * The function checks if the right arrow key is pressed and if the character's position is less than
+   * the end of the level.
+   * @returns The function `canMoveRight()` is returning a boolean value. It is checking if the right
+   * arrow key is being pressed (`this.world.keyboard.KEY_RIGHT`) and if the current x position of the
+   * object is less than the end of the level x position (`this.x < this.world.level.end_of_level_x`).
+   * If both conditions are true, it will return `true`, indicating that the object can move
+   */
   canMoveRight() {
     return (
       this.world.keyboard.KEY_RIGHT && this.x < this.world.level.end_of_level_x
@@ -134,33 +151,69 @@ class Pepe extends MovableObject {
   }
 
   moveRight() {
+    /**
+     * The function moves an object to the right and plays a sound if it is not above ground.
+     */
     super.moveRight();
     if (!this.isAboveGround()) world.playSound(this.walking_sound);
     this.flippedGraphics = false;
   }
 
+  /**
+   * The function checks if the left arrow key is pressed and if the object's x position is greater
+   * than 0.
+   * @returns The function `canMoveLeft()` is returning a boolean value. It will return `true` if the
+   * left arrow key is pressed and the x-coordinate of the object is greater than 0, indicating that it
+   * can move to the left. Otherwise, it will return `false`.
+   */
   canMoveLeft() {
     return this.world.keyboard.KEY_LEFT && this.x > 0;
   }
 
+  /**
+   * The function moves an object to the left, plays a sound if it's not above ground, and flips its
+   * graphics.
+   */
   moveLeft() {
     super.moveLeft();
     if (!this.isAboveGround()) world.playSound(this.walking_sound);
     this.flippedGraphics = true;
   }
 
+  /**
+   * The function returns a boolean value indicating whether the graphics are flipped to the left or
+   * not.
+   * @returns the value of the property `flippedGraphics`.
+   */
   isLookingLeft() {
     return this.flippedGraphics;
   }
 
+  /**
+   * The function checks if the player is moving left or right using keyboard input.
+   * @returns The function `isMoving()` is returning a boolean value. It will return `true` if either
+   * the `KEY_RIGHT` or `KEY_LEFT` key is currently being pressed on the keyboard, and `false`
+   * otherwise.
+   */
   isMoving() {
     return this.world.keyboard.KEY_RIGHT || this.world.keyboard.KEY_LEFT;
   }
 
+  /**
+   * The function checks if the space key is pressed and the character is not above the ground to
+   * determine if it can jump.
+   * @returns The function `canJump()` is returning a boolean value. It is checking if the space key is
+   * pressed on the keyboard and if the character is not currently above the ground. If both conditions
+   * are true, it will return `true`, otherwise it will return `false`.
+   */
   canJump() {
     return this.world.keyboard.KEY_SPACE && !this.isAboveGround();
   }
 
+  /**
+   * The function plays a dying animation by displaying a sequence of images and moving the object up
+   * and down.
+   */
   playDyingAnimation() {
     this.playAnimation(this.IMAGES_DEAD);
     setTimeout(() => {

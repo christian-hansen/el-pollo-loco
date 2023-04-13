@@ -16,9 +16,12 @@ class ThrowableBottle extends ThrowableObject {
     this.x = x;
     this.y = y;
     this.throw(direction);
-
   }
 
+  /**
+   * This function animates images by repeatedly calling the playAnimation function every 50
+   * milliseconds.
+   */
   animate() {
     setInterval(() => this.playAnimation(this.IMAGES_ROTATION), 50);
   }

@@ -7,13 +7,18 @@ class StatusBar extends DrawableObject {
     super();
   }
 
-  //setPercentage(50)
   setPercentage(percentage) {
     this.percentage = percentage; // => 0....5
     let path = this.IMAGES[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * The function returns an image index based on the percentage value.
+   * @returns The function `resolveImageIndex()` returns an integer value between 0 and 5 based on the
+   * value of the `percentage` property of the object calling the function. The value returned indicates
+   * which image should be displayed based on the progress of a task.
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

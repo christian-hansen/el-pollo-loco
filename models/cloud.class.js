@@ -14,6 +14,9 @@ class Cloud extends MovableObject {
     this.animate();
   }
 
+  /**
+   * The function repeatedly calls the "moveLeft" function every 100 milliseconds using setInterval.
+   */
   animate() {
     setInterval(() => {
       this.moveLeft();

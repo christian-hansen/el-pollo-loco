@@ -45,7 +45,7 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G25.png",
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
-  endbossDead_sound = new Audio('audio/win.wav');
+  endbossDead_sound = new Audio("audio/win.wav");
 
   constructor() {
     super().loadImage(this.IMAGES_WALKING[0]);
@@ -61,6 +61,10 @@ class Endboss extends MovableObject {
     this.animate();
   }
 
+  /**
+   * The function animates the endboss character and displays its health bar when the player character
+   * comes within a certain distance.
+   */
   animate() {
     let i;
     let hadFirstContact = false;
@@ -70,7 +74,7 @@ class Endboss extends MovableObject {
       if (world.character.x > this.x - 500 && !hadFirstContact) {
         i = 0;
         hadFirstContact = true;
-        world.statusBar.push(endbossHealthbar)
+        world.statusBar.push(endbossHealthbar);
       }
       this.playEndbossAnimationLoop(i);
       if (i === 65) {
@@ -80,6 +84,9 @@ class Endboss extends MovableObject {
     }, 150);
   }
 
+  /**
+   * The function checks if the endboss is dead or hurt and plays the appropriate sound or animation.
+   */
   playEndbossGotHit() {
     if (this.isDead()) {
       world.playSound(this.endbossDead_sound);
@@ -91,6 +98,13 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * The function plays different animations for an end boss character based on the value of the input
+   * parameter.
+   * @param i - The parameter "i" is a number that is used to determine which animation to play in the
+   * "playEndbossAnimationLoop" function. It is likely used as a counter or timer to control the timing
+   * and sequence of the different animations.
+   */
   playEndbossAnimationLoop(i) {
     if (i < 25) {
       this.playEndBossWalk();
@@ -103,22 +117,36 @@ class Endboss extends MovableObject {
     }
   }
 
+  /**
+   * The function plays an animation of the end boss dying and moves it down by 30 units.
+   */
   playEndbossDying() {
     this.playAnimation(this.IMAGES_DEAD);
     this.moveDown(30);
   }
 
+  /**
+   * The function makes the end boss character move left, play a walking animation, and trigger a "got
+   * hit" animation.
+   */
   playEndBossWalk() {
     this.moveLeft();
     this.playAnimation(this.IMAGES_WALKING);
     this.playEndbossGotHit();
   }
 
+  /**
+   * The function plays an animation and triggers the "endboss got hit" event.
+   */
   playEndbossAlert() {
     this.playAnimation(this.IMAGES_ALERT);
     this.playEndbossGotHit();
   }
 
+  /**
+   * The function makes the endboss move left, play an attack animation, and then play a got hit
+   * animation.
+   */
   playEndbossAttack() {
     this.moveLeft();
     this.playAnimation(this.IMAGES_ATTACK);

@@ -63,8 +63,8 @@ class World {
     this.addObjectsToMap(this.statusBar);
     // ---- ----
     this.ctx.translate(this.camera_x, 0);
-    this.addToMap(this.character);
     this.drawEnemies();
+    this.addToMap(this.character);
     this.drawThrowableObjects();
     this.ctx.translate(-this.camera_x, 0);
 
@@ -418,6 +418,8 @@ class World {
   hitEndboss(damage) {
     this.playSound(this.chickenHurt_sound);
     this.level.endboss[0].hit(damage);
+    this.level.endboss[0].hadFirstHit = true;
+    this.level.endboss[0].speed = 15;
     this.statusBar[3].setPercentage(this.level.endboss[0].energy);
   }
 

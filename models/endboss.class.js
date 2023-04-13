@@ -46,6 +46,7 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
   endbossDead_sound = new Audio("audio/win.wav");
+  hadFirstHit = false;
 
   constructor() {
     super().loadImage(this.IMAGES_WALKING[0]);
@@ -69,6 +70,7 @@ class Endboss extends MovableObject {
     let i;
     let hadFirstContact = false;
     let endbossHealthbar = new EndBossBar();
+    
 
     setInterval(() => {
       if (world.character.x > this.x - 500 && !hadFirstContact) {
@@ -106,13 +108,13 @@ class Endboss extends MovableObject {
    * and sequence of the different animations.
    */
   playEndbossAnimationLoop(i) {
-    if (i < 25) {
+    if (this.hadFirstHit) {
+      this.playEndbossAttack();
+    } else if (i < 25) {
       this.playEndBossWalk();
-    }
-    if (i > 25 && i < 45) {
+    } else if (i > 25 && i < 45) {
       this.playEndbossAlert();
-    }
-    if (i > 45 && i < 65) {
+    } else if (i > 45) {
       this.playEndbossAttack();
     }
   }
